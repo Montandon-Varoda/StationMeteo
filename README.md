@@ -18,4 +18,4 @@ v0 : ![20%](https://progress-bar.dev/20)
 ### License : [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 Lire : [LICENSE](https://github.com/Forestierr/Light_trainer/blob/master/LICENSE)
 
-<p align="center"> <br> <a href="https://github.com/Forestierr/"><img src="https://img.shields.io/badge/My-GitHub-red.svg" alt="version"/></a> <i> Robin Forestier 2020 / 2021 </i></p>
+<p align="center"> <br> <a href="https://github.com/Montandon-Varoda/"><img src="https://img.shields.io/badge/My-GitHub-red.svg" alt="version"/></a> <i> Montandon 2020 / 2021 </i></p>
