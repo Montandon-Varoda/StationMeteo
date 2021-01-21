@@ -1,4 +1,4 @@
-<h1 align="center"> StationMeteo </h1>
+<h1 align="center"> Station Météo </h1>
 <h2>But :</h2>
 L’objectif est de faire une page web qui va chercher les mesures faites par la station météo dans la base de données pour ensuite afficher la moyenne des mesures selon une période de temps choisit par l’utilisateur.
 
