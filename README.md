@@ -1,6 +1,6 @@
 <h1 align="center"> StationMeteo </h1>
 <p align="center">
-  <a href="https://github.com/Forestierr/Light_trainer/wiki"><img src="https://img.shields.io/badge/GitHub-Wiki-Green.svg" alt="git"/></a>
+  <a href="https://github.com/"><img src="https://img.shields.io/badge/GitHub-Wiki-Green.svg" alt="git"/></a>
   <a href=""><img src="https://img.shields.io/github/v/release/Forestierr/light_trainer?include_prereleases" alt="version"/></a>
 </p>
 
@@ -15,7 +15,4 @@ Prenez en compte l'avencement de chaque vesion et de ce qui a été testé. </br
 v0 : ![20%](https://progress-bar.dev/20) 
 - [ ] testée
 
-### License : [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-Lire : [LICENSE](https://github.com/Forestierr/Light_trainer/blob/master/LICENSE)
-
-<p align="center"> <br> <a href="https://github.com/Montandon-Varoda/"><img src="https://img.shields.io/badge/My-GitHub-red.svg" alt="version"/></a> <i> Montandon 2020 / 2021 </i></p>
+<p align="center"><br/><a href="https://github.com/Montandon-Varoda/"><img src="https://img.shields.io/badge/My-GitHub-red.svg" alt="version"/></a> <i>Montandon</i></p>
