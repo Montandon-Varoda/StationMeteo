@@ -1,8 +1,6 @@
 <h1 align="center"> StationMeteo </h1>
 <h2>But :</h2>
-Le but est de réaliser des Light d'entrainement.
-Chacune des Light poura communiquer avec les autre via WiFi. 
-L'utulisateur pourra gérer les mode d'tilisation via le WiFi généré par les Light en se rendant sur un site.
+L’objectif est de faire une page web qui va chercher les mesures faites par la station météo dans la base de données pour ensuite afficher la moyenne des mesures selon une période de temps choisit par l’utilisateur.
 
 ### Release :</br>
 Vous trouverez ici l'historique des version téléchargeable. </br>
