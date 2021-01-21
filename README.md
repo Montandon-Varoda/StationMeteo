@@ -6,7 +6,7 @@ L'utulisateur pourra gérer les mode d'tilisation via le WiFi généré par les 
 
 ### Release :</br>
 Vous trouverez ici l'historique des version téléchargeable. </br>
-[![Release](https://img.shields.io/github/v/release/Forestierr/light_trainer?include_prereleases)](https://github.com/Forestierr/Light_trainer/releases)</br>
+[![Release](https://img.shields.io/github/v/release/Montandon-Varoda/StationMeteo?include_prereleases)](https://github.com/Montandon-Varoda/StationMeteo/releases)</br>
 Prenez en compte l'avencement de chaque vesion.</br>
 v0.1 : ![100%](https://progress-bar.dev/100/)</br>
 v0.2 : ![10%](https://progress-bar.dev/10/) 
