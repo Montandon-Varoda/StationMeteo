@@ -8,7 +8,7 @@
 	*dans la base de données selon la période entrée et il 	*
 	*renvoie la moyenne de tout les mesures	à la page du 	*
 	*formulaire 											*					
-	*Modification:	Maxime Montandon 20.01.2020 			*
+	*Modification:	Maxime Montandon 25.01.2021 			*
 	*				Programme de base						*
 	********************************************************/
 	// On lance la session
@@ -41,13 +41,18 @@
 			$moyennePluie = 0;
 			$moyenneHumidité = 0;
 			$moyenneTemperature = 0;
+			$_SESSION['dateDebut'] = $_POST['dateDebut'];
+			$_SESSION['dateFin'] = $_POST['dateFin'];
+			$_SESSION['Rain'] = NULL;
+			$_SESSION['Humidity'] = NULL;
+			$_SESSION['Temperature'] = NULL;
 
 			// On control si la periode de temps est correcte 
-			if ($_POST['dateDebut'] < $_POST['dateFin']) 
+			if ($_SESSION['dateDebut'] < $_SESSION['dateFin']) 
 			{
 				// On va sélectionner le tableau et on va prendre toute les mesures qui se trouve dans la période de temps
 				$req = $bdd->prepare('SELECT * FROM temphumrain WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
-				$req->execute(array('debut' => $_POST['dateDebut'], 'fin' => $_POST['dateFin']));
+				$req->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
 
 				// On va chercher touts ce qui se trouve dans notre tableau
 				while ($donnees = $req->fetch()) 
@@ -61,15 +66,6 @@
 
 					// On indique que le tableau contient au moins une mesure
 					$control = 1;
-					
-					/*
-					//POUR VOIR LE DETAIL
-					echo "</br>Mesure <strong>".$moyenne."</strong>
-					</br>Date <strong>".date('d-m-Y H:i:s', strtotime($donnees['TimeStamp']))." </strong>
-					</br>Pluie <strong>".$donnees['Rain']."mm</strong>
-					</br>Humidité <strong>".$donnees['Humidity']."%</strong>
-					</br>Temperature <strong>".$donnees['Temperature']."°C</strong></br>";
-					*/
 				}
 
 				// Termine le traitement de la requête
@@ -84,25 +80,35 @@
 					$moyenneTemperature = $moyenneTemperature / $moyenne;
 
 					// On met le message qui contient les valeurs dans la session message
-					$_SESSION['message'] = "
-					</br>Du <strong>".date('d-m-Y H:i:s', strtotime($_POST['dateDebut']))." </strong> 
-					Au <strong>".date('d-m-Y H:i:s', strtotime($_POST['dateFin']))." </strong>
-					</br>La précipitation moyenne est de <strong>".round($moyennePluie, 1)."mm</strong>
-					</br>L'humidité moyen est de <strong>".round($moyenneHumidité, 1)."%</strong>
-					</br>La temperature moyenne est de <strong>".round($moyenneTemperature, 1)."°C</strong>";
+					$_SESSION['messageDate'] = "</br>Du <strong>".date('d-m-Y H:i:s', strtotime($_SESSION['dateDebut']))." </strong> Au <strong>".date('d-m-Y H:i:s', strtotime($_SESSION['dateFin']))." </strong>";
+
+					if ($_SESSION['Rain'] = $_POST['Rain']) 
+					{
+						$_SESSION['messageRain'] = "</br>La précipitation moyenne est de <strong>".round($moyennePluie, 1)."mm</strong>";
+					}
+					
+					if ($_SESSION['Humidity'] = $_POST['Humidity']) 
+					{
+						$_SESSION['messageHumidity' ] = "</br>L'humidité moyen est de <strong>".round($moyenneHumidité, 1)."%</strong>";
+					}
+					
+					if ($_SESSION['Temperature'] = $_POST['Temperature']) 
+					{
+						$_SESSION['messageTemperature'] = "</br>La temperature moyenne est de <strong>".round($moyenneTemperature, 1)."°C</strong>";
+					}
 				}
 
 				else
 				{
 					// On indique qu'il n'y a aucune mesure
-					$_SESSION['message'] = "<strong></br>Il n'y a aucune mesure prise à cette période</strong>";
+					$_SESSION['messageError'] = "<strong></br>Il n'y a aucune mesure prise à cette période</strong>";
 				}
 			}
 
 			else
 			{
 				// On indique que la periode de temps n'est pas possible
-				$_SESSION['message'] = "<strong></br>Cette periode de temps n'est pas possible !!!</strong>";
+				$_SESSION['messageError'] = "<strong></br>Cette periode de temps n'est pas possible !!!</strong>";
 			}
 			
 			// Redirection a la page principal
