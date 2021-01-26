@@ -10,7 +10,7 @@ L’objectif est de faire une page web qui va chercher les mesures faites par la
 Prenez en compte l'avencement de chaque vesion.
 <p>
   v0.1 : <a href="http://www.zappvion.ch/StationMeteo/"><img src="https://progress-bar.dev/100/"/></br></a>
-  v0.2 : <a href="http://www.zappvion.ch/StationMeteo/"><img src="https://progress-bar.dev/34/"/></a>
+  v0.2 : <a href="http://www.zappvion.ch/StationMeteo/"><img src="https://progress-bar.dev/48/"/></a>
 </p>
 <p align="center">
   <a href="https://github.com/Montandon-Varoda/"><img src="https://img.shields.io/badge/My-GitHub-red.svg" alt="version"/></a><i>Montandon</i>
