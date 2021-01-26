@@ -22,11 +22,8 @@
 	<body>
 		<div id="page">
 			<header>
-				<div id="titre">
-					<img src="image/iconMeteo.png">
-					<h1>Station Météo</h1>
-				</div>
-				<h2>Maxime Montandon</h2>
+				<img src="image/iconMeteo.png">
+				<h1>Station Météo</h1>		
 			</header>
 			<section>
 
@@ -84,7 +81,11 @@
 					?>
 				</p>
 			</section>
-		</div>
-		
+			<footer>
+				<p>
+					Développé par: <a href="https://github.com/Montandon-Varoda/StationMeteo">Montandon</a>
+				</p>
+			</footer>
+		</div>	
 	</body>
 </html>
