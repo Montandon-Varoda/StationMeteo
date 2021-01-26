@@ -41,11 +41,14 @@
 			$moyennePluie = 0;
 			$moyenneHumidité = 0;
 			$moyenneTemperature = 0;
+			$moyenneWindSpeed = 0;
+			$moyenneSpeed = 0;
 			$_SESSION['dateDebut'] = $_POST['dateDebut'];
 			$_SESSION['dateFin'] = $_POST['dateFin'];
 			$_SESSION['Rain'] = NULL;
 			$_SESSION['Humidity'] = NULL;
 			$_SESSION['Temperature'] = NULL;
+			$_SESSION['WindSpeed'] = NULL;
 
 			// On control si la periode de temps est correcte 
 			if ($_SESSION['dateDebut'] < $_SESSION['dateFin']) 
@@ -71,6 +74,25 @@
 				// Termine le traitement de la requête
 				$req->closeCursor(); 
 
+				// On va sélectionner le tableau et on va prendre toute les mesures qui se trouve dans la période de temps
+				$req = $bdd->prepare('SELECT * FROM windspeed WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
+				$req->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
+
+				// On va chercher touts ce qui se trouve dans notre tableau
+				while ($donnees = $req->fetch()) 
+				{
+
+					// On récupère tous les données pour en faire une moyenne plus tard
+					$moyenneSpeed ++;
+					$moyenneWindSpeed = $moyenneWindSpeed + $donnees['WindSpeed'];
+
+					// On indique que le tableau contient au moins une mesure
+					$control = 1;
+				}
+
+				// Termine le traitement de la requête
+				$req->closeCursor(); 
+
 				// Si il y a au moins une mesure
 				if ($control == 1) 
 				{
@@ -78,6 +100,7 @@
 					$moyennePluie = $moyennePluie / $moyenne;
 					$moyenneHumidité = $moyenneHumidité / $moyenne;
 					$moyenneTemperature = $moyenneTemperature / $moyenne;
+					$moyenneWindSpeed = $moyenneWindSpeed / $moyenneSpeed;
 
 					// On met le message qui contient les valeurs dans la session message
 					$_SESSION['messageDate'] = "</br>Du <strong>".date('d-m-Y H:i:s', strtotime($_SESSION['dateDebut']))." </strong> Au <strong>".date('d-m-Y H:i:s', strtotime($_SESSION['dateFin']))." </strong>";
@@ -95,6 +118,11 @@
 					if ($_SESSION['Temperature'] = $_POST['Temperature']) 
 					{
 						$_SESSION['messageTemperature'] = "</br>La temperature moyenne est de <strong>".round($moyenneTemperature, 1)."°C</strong>";
+					}
+
+					if ($_SESSION['WindSpeed'] = $_POST['windSpeed']) 
+					{
+						$_SESSION['messageWindSpeed'] = "</br>La vitesse moyenne du vent est de <strong>".round($moyenneWindSpeed, 1)."km/h</strong>";
 					}
 				}
 

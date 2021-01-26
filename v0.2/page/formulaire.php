@@ -63,6 +63,7 @@
 							echo $_SESSION['messageRain'];
 							echo $_SESSION['messageHumidity'];
 							echo $_SESSION['messageTemperature'];
+							echo $_SESSION['messageWindSpeed'];
 					?>
 							<form action="detail.php" method="post">
 								<input type="submit" value="Détail">	
@@ -79,6 +80,7 @@
 						$_SESSION['messageRain'] = NULL;
 						$_SESSION['messageHumidity'] = NULL;
 						$_SESSION['messageTemperature'] = NULL;
+						$_SESSION['messageWindSpeed'] = NULL;
 					?>
 				</p>
 			</section>

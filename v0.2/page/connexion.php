@@ -18,11 +18,13 @@
 	$_SESSION['messageRain'] = NULL;
 	$_SESSION['messageHumidity'] = NULL;
 	$_SESSION['messageTemperature'] = NULL;
+	$_SESSION['messageWindSpeed'] = NULL;
 	$_SESSION['dateDebut'] = NULL;
 	$_SESSION['dateFin'] = NULL;
 	$_SESSION['Rain'] = NULL;
 	$_SESSION['Humidity'] = NULL;
 	$_SESSION['Temperature'] = NULL;
+	$_SESSION['WindSpeed'] = NULL;
 
 	// Redirection a la page principal
 	header('Location: formulaire.php');
