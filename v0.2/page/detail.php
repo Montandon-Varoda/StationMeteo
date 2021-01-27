@@ -11,10 +11,8 @@
 <body>
 	<div id="page">
 		<header>
-			<div id="titre">
-				<img src="image/iconMeteo.png">
-				<h1>Station Météo</h1>
-			</div>
+			<img src="image/iconMeteo.png">
+			<h1>Station Météo</h1>
 		</header>
 		<section>
 			<h2>Les Mesures:</h2>

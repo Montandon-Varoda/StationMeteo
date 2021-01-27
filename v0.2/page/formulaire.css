@@ -1,8 +1,13 @@
-/*
-Titre css
-Auteur Maxime Montandon
-Date 25.01.2021
-*/
+/****************************************
+*Titre:		Formulaire CSS				*
+*Auteur:	Maxime Montandon			*
+*Date:		25.01.2021					*
+*Lieu:		Force Aérienne Payerne		*
+****************************************/
+
+/****************
+*	Corp Page	*
+****************/
 
 body
 {
@@ -20,6 +25,9 @@ body
 	background-color: rgba(09,09,09,0.3);
 }
 
+/****************
+*	En-Tête		*
+****************/
 header
 {
 	display: flex;
@@ -41,6 +49,10 @@ header h1
 	text-align: center;
 }
 
+/****************
+*	Section		*
+****************/
+
 section
 {
 	padding-top: 20px;
@@ -60,6 +72,10 @@ section h2
 {
 	font-size: 20px;
 }
+
+/****************
+*	Pied		*
+****************/
 
 footer
 {
@@ -82,8 +98,17 @@ footer a:hover
 	font-weight: 600;
 }
 
+/****************
+*	Phone		*
+****************/
+
 @media all and (max-width: 1024px)
 {
+
+	/****************
+	*	Corp Page	*
+	****************/
+
 	#page
 	{
 		width: auto;
@@ -99,12 +124,20 @@ footer a:hover
 		margin-left: auto;
 	}
 
+	/****************
+	*	En-Tête		*
+	****************/
+
 	header h1
 	{
 		font-size: 100px;
 		text-align: center;
 		margin-right: auto;
 	}
+
+	/****************
+	*	Section		*
+	****************/
 
 	section
 	{
@@ -125,10 +158,9 @@ footer a:hover
 		font-size: 50px;
 	}
 
-	input
-	{
-		size: 20px;
-	}
+	/****************
+	*	Pied		*
+	****************/
 
 	footer
 	{

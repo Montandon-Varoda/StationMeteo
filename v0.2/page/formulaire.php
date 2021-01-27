@@ -6,7 +6,7 @@
 	*Lieux:			Force Aérienne de Payerne 				*
 	*Description:	Page d'interaction qui permet d'entrer  * 
 	*une période puis ensuite voir le résultat				*						
-	*Modification:	Maxime Montandon 25.01.2021 			*
+	*Modification:	Maxime Montandon 27.01.2021 			*
 	*				Programme de base						*
 	********************************************************/
 	// On lance la session
@@ -60,6 +60,7 @@
 							echo $_SESSION['messageRain'];
 							echo $_SESSION['messageHumidity'];
 							echo $_SESSION['messageTemperature'];
+							echo $_SESSION['messageWindDirection'];
 							echo $_SESSION['messageWindSpeed'];
 					?>
 							<form action="detail.php" method="post">
@@ -77,6 +78,7 @@
 						$_SESSION['messageRain'] = NULL;
 						$_SESSION['messageHumidity'] = NULL;
 						$_SESSION['messageTemperature'] = NULL;
+						$_SESSION['messageWindDirection'] = NULL;
 						$_SESSION['messageWindSpeed'] = NULL;
 					?>
 				</p>

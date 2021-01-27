@@ -8,7 +8,7 @@
 	*dans la base de données selon la période entrée et il 	*
 	*renvoie la moyenne de tout les mesures	à la page du 	*
 	*formulaire 											*					
-	*Modification:	Maxime Montandon 25.01.2021 			*
+	*Modification:	Maxime Montandon 27.01.2021 			*
 	*				Programme de base						*
 	********************************************************/
 	// On lance la session
@@ -41,18 +41,27 @@
 			$moyennePluie = 0;
 			$moyenneHumidité = 0;
 			$moyenneTemperature = 0;
+			$windDirection = 0;
 			$moyenneWindSpeed = 0;
 			$moyenneSpeed = 0;
+
+			//On initialise les sessions
 			$_SESSION['dateDebut'] = $_POST['dateDebut'];
 			$_SESSION['dateFin'] = $_POST['dateFin'];
 			$_SESSION['Rain'] = NULL;
 			$_SESSION['Humidity'] = NULL;
 			$_SESSION['Temperature'] = NULL;
 			$_SESSION['WindSpeed'] = NULL;
+			$_SESSION['WindDirection'] = NULL;
 
 			// On control si la periode de temps est correcte 
 			if ($_SESSION['dateDebut'] < $_SESSION['dateFin']) 
 			{
+
+				/***********************************
+				*BDD Pluie, Température et Humidité*
+				***********************************/
+
 				// On va sélectionner le tableau et on va prendre toute les mesures qui se trouve dans la période de temps
 				$req = $bdd->prepare('SELECT * FROM temphumrain WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
 				$req->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
@@ -74,6 +83,41 @@
 				// Termine le traitement de la requête
 				$req->closeCursor(); 
 
+				/**********************
+				*BDD Direction du Vent*
+				**********************/
+
+				// On va sélectionner le tableau et on va prendre toute les mesures qui se trouve dans la période de temps et on va regrouper toute les mesures semblable entre elle et on récupère le plus grand groupe 
+				$req = $bdd->prepare('SELECT * FROM winddirection WHERE TimeStamp >= :debut AND TimeStamp <= :fin GROUP BY WindDirection ORDER BY COUNT(WindDirection) DESC LIMIT 1');
+				$req->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
+
+				// On va chercher touts ce qui se trouve dans notre tableau
+				while ($donnees = $req->fetch()) 
+				{
+					// On regarede si c'est un vent d'est ou d'ouest
+					if ($donnees['WindDirection'] == 'E' OR $donnees['WindDirection'] == 'W') 
+					{
+						// on affiche "d'" avant la direction
+						$windDirection = "d'".$donnees['WindDirection'];
+					}
+					
+					else
+					{
+						//on affiche "du" avant la direction
+						$windDirection = "du ".$donnees['WindDirection'];
+					}
+
+					// On indique que le tableau contient au moins une mesure
+					$control = 1;
+				}
+
+				// Termine le traitement de la requête
+				$req->closeCursor(); 
+
+				/********************
+				*BDD Vitesse du Vent*
+				********************/
+
 				// On va sélectionner le tableau et on va prendre toute les mesures qui se trouve dans la période de temps
 				$req = $bdd->prepare('SELECT * FROM windspeed WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
 				$req->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
@@ -93,6 +137,10 @@
 				// Termine le traitement de la requête
 				$req->closeCursor(); 
 
+				/**********************
+				*Affichage et Moyenne *
+				**********************/
+
 				// Si il y a au moins une mesure
 				if ($control == 1) 
 				{
@@ -107,7 +155,7 @@
 
 					if ($_SESSION['Rain'] = $_POST['Rain']) 
 					{
-						$_SESSION['messageRain'] = "</br>La précipitation moyenne est de <strong>".round($moyennePluie, 1)."mm</strong>";
+						$_SESSION['messageRain'] = "</br>La précipitation moyenne est de <strong>".round($moyennePluie, 1)." mm</strong>";
 					}
 					
 					if ($_SESSION['Humidity'] = $_POST['Humidity']) 
@@ -120,9 +168,14 @@
 						$_SESSION['messageTemperature'] = "</br>La temperature moyenne est de <strong>".round($moyenneTemperature, 1)."°C</strong>";
 					}
 
+					if ($_SESSION['WindDirection'] = $_POST['windDirection']) 
+					{
+						$_SESSION['messageWindDirection'] = "</br>Le vent vient principalement <strong>".$windDirection."</strong>";
+					}
+
 					if ($_SESSION['WindSpeed'] = $_POST['windSpeed']) 
 					{
-						$_SESSION['messageWindSpeed'] = "</br>La vitesse moyenne du vent est de <strong>".round($moyenneWindSpeed, 1)."km/h</strong>";
+						$_SESSION['messageWindSpeed'] = "</br>La vitesse moyenne du vent est de <strong>".round($moyenneWindSpeed, 1)." km/h</strong>";
 					}
 				}
 
