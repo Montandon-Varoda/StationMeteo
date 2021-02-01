@@ -5,7 +5,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="detail.css">
+	<link rel="stylesheet" type="text/css" href="detail.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="detailPrint.css" media="print">
 	<title>detail</title>
 </head>
 <body>
@@ -29,36 +30,100 @@
 				}
 				//Si il n'y a pas d'erreur on peut continuer
 
-				$moyenne = 0;
+				$numero = 0;
 				// On va sélectionner le tableau et on va prendre toute les mesures qui se trouve dans la période de temps
 				$req = $bdd->prepare('SELECT * FROM temphumrain WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
 				$req->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
 
+				$reqD = $bdd->prepare('SELECT * FROM winddirection WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
+				$reqD->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
+
+				$reqS = $bdd->prepare('SELECT * FROM windspeed WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
+				$reqS->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
+
+				echo "
+				<table>
+					<tr>
+						<th>
+							N°
+						</th>
+						<th>
+							Date
+						</th>
+						<th>
+							Précipitations
+						</th>
+						<th>
+							Humidité
+						</th>
+						<th>
+							Temperature
+						</th>
+						<th>
+							Direction du vent
+						</th>
+						<th>
+							Vitesse du vent
+						</th>
+					</tr>";	 
 				// On va chercher touts ce qui se trouve dans notre tableau
 				while ($donnees = $req->fetch()) 
 				{
-					$moyenne ++;
+					$donneesD = $reqD->fetch();
+					$donneesS = $reqS->fetch();
+					$numero ++;
 					
-					//POUR VOIR LE DETAIL
-					echo "Mesure <strong>N°".$moyenne."</strong>
-					</br>Mesure prise le: <strong>".date('d-m-Y H:i:s', strtotime($donnees['TimeStamp']))." </strong>";
+					echo "<tr><td>".$numero."</td>";
+					echo "<td>".date('d-m-Y H:i:s', strtotime($donnees['TimeStamp']))."</td>";
 					if ($_SESSION['Rain']) 
 					{
-						echo "</br>Les précipitations sont de: <strong>".$donnees['Rain']."mm</strong>";
+						echo "<td>".$donnees['Rain']." mm</td>";
+					}
+					else
+					{
+						echo "<td>-</td>";
 					}
 					if ($_SESSION['Humidity']) 
 					{
-						echo "</br>Le taux humidité est de: <strong>".$donnees['Humidity']."%</strong>";
+						echo "<td>".$donnees['Humidity']."%</td>";
+					}
+					else
+					{
+						echo "<td>-</td>";
 					}
 					if ($_SESSION['Temperature']) 
 					{
-						echo "</br>La temperature est de: <strong>".$donnees['Temperature']."°C</strong>";
+						echo "<td>".$donnees['Temperature']."°C</td>";
 					}
-					echo "</br></br>";
-				}
+					else
+					{
+						echo "<td>-</td>";
+					}
 
+					if ( $_SESSION['WindDirection']) 
+					{
+						echo "<td>".$donneesD['WindDirection']."</td>";
+					}
+					else
+					{
+						echo "<td>-</td>";
+					}
+
+					if ( $_SESSION['WindSpeed']) 
+					{
+						echo "<td>".$donneesS['WindSpeed']." km/h</td>";
+					}
+					else
+					{
+						echo "<td>-</td>";
+					}
+					echo "</tr>";	
+				}
+				echo "</table>";
 				// Termine le traitement de la requête
 				$req->closeCursor(); 
+				$reqD->closeCursor();
+				$reqS->closeCursor();
 			?>	
 		</section>
 		<footer>

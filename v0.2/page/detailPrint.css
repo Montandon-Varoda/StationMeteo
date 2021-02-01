@@ -10,17 +10,13 @@
 ****************/
 body
 {
-	background-color: rgb(155,200,255);
-	background-attachment: fixed;
 	font-family: Arial, sans-serif;
 	color: #090909;	
 }
 
 #page
 {
-	width: 750px;
-	margin: auto; 
-	background-color: rgba(09,09,09,0.3);
+	width: auto; 
 }
 
 /****************
@@ -31,49 +27,39 @@ header
 {
 	display: flex;
 	flex-direction: row;
-	padding: 0px;
+	justify-content: center;
 }
 
 img
 {
-	width: 80px;
-	height: 80px;
-	margin-top: 20px;
-	margin-left: 150px;
+	width: 15mm;
+	height: 15mm;
 }
 
 header h1
 {
-	font-size: 50px;
-	text-align: center;
+	font-size: 200%;
 }
 
 /****************
 *	Section		*
 ****************/
 
-section
-{
-	padding-left: 20px;
-	padding-top: 20px;
-}
-
 section h2
 {
-	text-align: left;
-	font-size: 30px;
-	margin-top: 0px;
+	font-size: 125%;
 }
 
 table
 {
+	margin: auto;
 	text-align: center;
 	border-collapse: collapse;
 }
 
 table tr:nth-child(odd)
 {
-  background-color: rgb(0,100,200);
+  	background-color: rgb(150,255,255);
 }
  
 td, th
@@ -88,21 +74,14 @@ td, th
 footer
 {
 	text-align: right;
-	font-size: 12px;
+	font-size: 75%;
 }
 
 footer a
 {
 	text-decoration: none;
-	color: purple;
+	color: rgb(255, 50, 200);
 	font-weight: 800;
 }
 
-footer a:hover
-{
-	text-decoration: underline;
-	color: red;
-	font-size: 15px;
-	font-weight: 600;
-}
 

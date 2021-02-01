@@ -44,9 +44,9 @@
 
 					<h2>La Période:</h2>
 					<label for="dateDebut">Depuis le:</label>
-					<input type="datetime" name="dateDebut" value="2021-01-01 00:00:00" required></br>
+					<input type="datetime" name="dateDebut" value="2021-01-07 00:00:00" required></br>
 					<label for="dateFin">Jusqu'au:</label>
-					<input type="datetime" name="dateFin" value="2021-01-01 23:59:59" required></br>
+					<input type="datetime" name="dateFin" value="2021-01-07 23:59:59" required></br>
 
 					<input type="submit" value="Appliquer">	
 				</form>
