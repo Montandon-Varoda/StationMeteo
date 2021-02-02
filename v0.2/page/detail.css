@@ -18,7 +18,7 @@ body
 
 #page
 {
-	width: 750px;
+	width: 900px;
 	margin: auto; 
 	background-color: rgba(09,09,09,0.3);
 }
@@ -39,7 +39,7 @@ img
 	width: 80px;
 	height: 80px;
 	margin-top: 20px;
-	margin-left: 150px;
+	margin-left: 200px;
 }
 
 header h1
@@ -54,8 +54,10 @@ header h1
 
 section
 {
-	padding-left: 20px;
-	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 15px;
 }
 
 section h2

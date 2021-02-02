@@ -30,10 +30,27 @@
 				}
 				//Si il n'y a pas d'erreur on peut continuer
 
+				//recupereation de toutes les dates des mesures durant la période
+				$req = $bdd->prepare('
+					SELECT TimeStamp FROM temphumrain WHERE TimeStamp >= :debut AND TimeStamp <= :fin
+					UNION  
+					SELECT TimeStamp FROM winddirection WHERE TimeStamp >= :debut AND TimeStamp <= :fin
+					UNION  
+					SELECT TimeStamp FROM windspeed WHERE TimeStamp >= :debut AND TimeStamp <= :fin
+					ORDER BY TimeStamp');
+				$req->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
+
+				/*
+				$req = $req->fetchAll(PDO::FETCH_ASSOC); 
+                echo '<pre>';
+                print_r($req);
+                echo '</pre>';
+                */
+
 				$numero = 0;
 				// On va sélectionner le tableau et on va prendre toute les mesures qui se trouve dans la période de temps
-				$req = $bdd->prepare('SELECT * FROM temphumrain WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
-				$req->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
+				$reqT = $bdd->prepare('SELECT * FROM temphumrain WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
+				$reqT->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
 
 				$reqD = $bdd->prepare('SELECT * FROM winddirection WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
 				$reqD->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
@@ -41,6 +58,8 @@
 				$reqS = $bdd->prepare('SELECT * FROM windspeed WHERE TimeStamp >= :debut AND TimeStamp <= :fin');
 				$reqS->execute(array('debut' => $_SESSION['dateDebut'], 'fin' => $_SESSION['dateFin']));
 
+
+				//affiche l'en-tête du tableau de mesures
 				echo "
 				<table>
 					<tr>
@@ -66,62 +85,107 @@
 							Vitesse du vent
 						</th>
 					</tr>";	 
-				// On va chercher touts ce qui se trouve dans notre tableau
+				// On va chercher touts ce qui se trouve dans nos base de données et on l'affiche les mesures dans notre tableau
+				$donneesT = $reqT->fetch();
+				$donneesD = $reqD->fetch();
+				$donneesS = $reqS->fetch();
+
 				while ($donnees = $req->fetch()) 
 				{
-					$donneesD = $reqD->fetch();
-					$donneesS = $reqS->fetch();
+					//Affiche le numero de mesure
 					$numero ++;
-					
 					echo "<tr><td>".$numero."</td>";
+
+					// Affiche la date de la mesure
 					echo "<td>".date('d-m-Y H:i:s', strtotime($donnees['TimeStamp']))."</td>";
-					if ($_SESSION['Rain']) 
+
+					//Cotrole si la date corespond
+					if ($donnees['TimeStamp'] == $donneesT['TimeStamp']) 
 					{
-						echo "<td>".$donnees['Rain']." mm</td>";
+						//Controle si la condition a été coché 
+						if ($_SESSION['Rain']) 
+						{
+							echo "<td>".$donneesT['Rain']." mm</td>";
+						}
+						else
+						{
+							echo "<td>-</td>";
+						}
+						//Controle si la condition a été coché 
+						if ($_SESSION['Humidity']) 
+						{
+							echo "<td>".$donneesT['Humidity']."%</td>";
+						}
+						else
+						{
+							echo "<td>-</td>";
+						}
+						//Controle si la condition a été coché 
+						if ($_SESSION['Temperature']) 
+						{
+							echo "<td>".$donneesT['Temperature']."°C</td>";
+						}
+						else
+						{
+							echo "<td>-</td>";
+						}
+						$donneesT = $reqT->fetch();
 					}
 					else
 					{
 						echo "<td>-</td>";
+						echo "<td>-</td>";
+						echo "<td>-</td>";	
 					}
-					if ($_SESSION['Humidity']) 
+						
+					//Cotrole si la date corespond	
+					if ($donnees['TimeStamp'] == $donneesD['TimeStamp']) 
 					{
-						echo "<td>".$donnees['Humidity']."%</td>";
+						//Controle si la condition a été coché 
+						if ( $_SESSION['WindDirection']) 
+						{
+							echo "<td>".$donneesD['WindDirection']."</td>";
+						}
+						else
+						{
+							echo "<td>-</td>";
+						}
+						$donneesD = $reqD->fetch();
 					}
 					else
 					{
-						echo "<td>-</td>";
-					}
-					if ($_SESSION['Temperature']) 
-					{
-						echo "<td>".$donnees['Temperature']."°C</td>";
-					}
-					else
-					{
-						echo "<td>-</td>";
+						echo "<td>-</td>";	
 					}
 
-					if ( $_SESSION['WindDirection']) 
+					//Cotrole si la date corespond
+					if ($donnees['TimeStamp'] == $donneesS['TimeStamp']) 
 					{
-						echo "<td>".$donneesD['WindDirection']."</td>";
+						//Controle si la condition a été coché 
+						if ( $_SESSION['WindSpeed']) 
+						{
+							echo "<td>".$donneesS['WindSpeed']." km/h</td>";
+						}
+						else
+						{
+							echo "<td>-</td>";
+						}
+						$donneesS = $reqS->fetch();
 					}
 					else
 					{
-						echo "<td>-</td>";
+						echo "<td>-</td>";	
 					}
 
-					if ( $_SESSION['WindSpeed']) 
-					{
-						echo "<td>".$donneesS['WindSpeed']." km/h</td>";
-					}
-					else
-					{
-						echo "<td>-</td>";
-					}
-					echo "</tr>";	
+					// fin de la ligne du tableau
+					echo "</tr>";
 				}
+				
+				//fin du tableau
 				echo "</table>";
+				
 				// Termine le traitement de la requête
 				$req->closeCursor(); 
+				$reqT->closeCursor();
 				$reqD->closeCursor();
 				$reqS->closeCursor();
 			?>	
