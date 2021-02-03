@@ -8,7 +8,7 @@
 	*dans la base de données selon la période entrée et il 	*
 	*renvoie la moyenne de tout les mesures	à la page du 	*
 	*formulaire 											*					
-	*Modification:	Maxime Montandon 27.01.2021 			*
+	*Modification:	Maxime Montandon 03.01.2021 			*
 	*				Programme de base						*
 	********************************************************/
 	// On lance la session
@@ -46,8 +46,8 @@
 			$moyenneSpeed = 0;
 
 			//On initialise les sessions
-			$_SESSION['dateDebut'] = $_POST['dateDebut'];
-			$_SESSION['dateFin'] = $_POST['dateFin'];
+			$_SESSION['dateDebut'] = date('Y-m-d H:i:s', strtotime($_POST['dateDebut']));
+			$_SESSION['dateFin'] = date('Y-m-d H:i:s', strtotime($_POST['dateFin']));
 			$_SESSION['Rain'] = NULL;
 			$_SESSION['Humidity'] = NULL;
 			$_SESSION['Temperature'] = NULL;

@@ -1,4 +1,17 @@
 <?php
+	/********************************************************
+	*Titre:			Détail Météo							*
+	*Auteur:		Maxime Montandon						*
+	*Date:			27.01.2021								*
+	*Lieux:			Force Aérienne de Payerne 				*
+	*Description:	Il va chercher tout les valeurs mesurés * 
+	*dans la base de données selon la période entrée et il 	*
+	*renvoie la moyenne de tout les mesures	à la page du 	*
+	*formulaire 											*					
+	*Modification:	Maxime Montandon 03.01.2021 			*
+	*				Programme de base						*
+	********************************************************/
+	// On lance la session
 	session_start();
 ?>
 <!DOCTYPE html>

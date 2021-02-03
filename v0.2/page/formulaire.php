@@ -6,7 +6,7 @@
 	*Lieux:			Force Aérienne de Payerne 				*
 	*Description:	Page d'interaction qui permet d'entrer  * 
 	*une période puis ensuite voir le résultat				*						
-	*Modification:	Maxime Montandon 27.01.2021 			*
+	*Modification:	Maxime Montandon 03.01.2021 			*
 	*				Programme de base						*
 	********************************************************/
 	// On lance la session
@@ -44,9 +44,9 @@
 
 					<h2>La Période:</h2>
 					<label for="dateDebut">Depuis le:</label>
-					<input type="datetime" name="dateDebut" value="2021-01-07 00:00:00" required></br>
+					<input type="datetime-local" name="dateDebut" value="2021-01-07T00:00" required></br>
 					<label for="dateFin">Jusqu'au:</label>
-					<input type="datetime" name="dateFin" value="2021-01-07 23:59:59" required></br>
+					<input type="datetime-local" name="dateFin" value="2021-01-07T23:59" required></br>
 
 					<input type="submit" value="Appliquer">	
 				</form>
