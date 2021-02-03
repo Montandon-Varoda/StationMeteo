@@ -92,92 +92,97 @@
 
 				while ($donnees = $req->fetch()) 
 				{
-					//Affiche le numero de mesure
-					$numero ++;
-					echo "<tr><td>".$numero."</td>";
+					//On vient regarder a quelle base de données la date appartient et on controle si la condition a été cochée
+					if (($donnees['TimeStamp'] == $donneesT['TimeStamp'] AND ($_SESSION['Rain'] OR $_SESSION['Humidity'] OR $_SESSION['Temperature'])) OR ($donnees['TimeStamp'] == $donneesD['TimeStamp'] AND $_SESSION['WindDirection']) OR ($donnees['TimeStamp'] == $donneesS['TimeStamp'] AND $_SESSION['WindSpeed'])) 
+					{
+						//Affiche le numero de mesure
+						$numero ++;
+						echo "<tr><td>".$numero."</td>";
 
-					// Affiche la date de la mesure
-					echo "<td>".date('d-m-Y H:i:s', strtotime($donnees['TimeStamp']))."</td>";
+						// Affiche la date de la mesure
+						echo "<td>".date('d-m-Y H:i:s', strtotime($donnees['TimeStamp']))."</td>";
 
-					//Cotrole si la date corespond
-					if ($donnees['TimeStamp'] == $donneesT['TimeStamp']) 
-					{
-						//Controle si la condition a été coché 
-						if ($_SESSION['Rain']) 
+						//Cotrole si la date corespond
+						if ($donnees['TimeStamp'] == $donneesT['TimeStamp']) 
 						{
-							echo "<td>".$donneesT['Rain']." mm</td>";
+							//Controle si la condition a été coché 
+							if ($_SESSION['Rain']) 
+							{
+								echo "<td>".$donneesT['Rain']." mm</td>";
+							}
+							else
+							{
+								echo "<td>-</td>";
+							}
+							//Controle si la condition a été coché 
+							if ($_SESSION['Humidity']) 
+							{
+								echo "<td>".$donneesT['Humidity']."%</td>";
+							}
+							else
+							{
+								echo "<td>-</td>";
+							}
+							//Controle si la condition a été coché 
+							if ($_SESSION['Temperature']) 
+							{
+								echo "<td>".$donneesT['Temperature']."°C</td>";
+							}
+							else
+							{
+								echo "<td>-</td>";
+							}
+							$donneesT = $reqT->fetch();
 						}
 						else
 						{
 							echo "<td>-</td>";
+							echo "<td>-</td>";
+							echo "<td>-</td>";	
 						}
-						//Controle si la condition a été coché 
-						if ($_SESSION['Humidity']) 
+							
+						//Cotrole si la date corespond	
+						if ($donnees['TimeStamp'] == $donneesD['TimeStamp']) 
 						{
-							echo "<td>".$donneesT['Humidity']."%</td>";
+							//Controle si la condition a été coché 
+							if ( $_SESSION['WindDirection']) 
+							{
+								echo "<td>".$donneesD['WindDirection']."</td>";
+							}
+							else
+							{
+								echo "<td>-</td>";
+							}
+							$donneesD = $reqD->fetch();
 						}
 						else
 						{
-							echo "<td>-</td>";
+							echo "<td>-</td>";	
 						}
-						//Controle si la condition a été coché 
-						if ($_SESSION['Temperature']) 
-						{
-							echo "<td>".$donneesT['Temperature']."°C</td>";
-						}
-						else
-						{
-							echo "<td>-</td>";
-						}
-						$donneesT = $reqT->fetch();
-					}
-					else
-					{
-						echo "<td>-</td>";
-						echo "<td>-</td>";
-						echo "<td>-</td>";	
-					}
-						
-					//Cotrole si la date corespond	
-					if ($donnees['TimeStamp'] == $donneesD['TimeStamp']) 
-					{
-						//Controle si la condition a été coché 
-						if ( $_SESSION['WindDirection']) 
-						{
-							echo "<td>".$donneesD['WindDirection']."</td>";
-						}
-						else
-						{
-							echo "<td>-</td>";
-						}
-						$donneesD = $reqD->fetch();
-					}
-					else
-					{
-						echo "<td>-</td>";	
-					}
 
-					//Cotrole si la date corespond
-					if ($donnees['TimeStamp'] == $donneesS['TimeStamp']) 
-					{
-						//Controle si la condition a été coché 
-						if ( $_SESSION['WindSpeed']) 
+						//Cotrole si la date corespond
+						if ($donnees['TimeStamp'] == $donneesS['TimeStamp']) 
 						{
-							echo "<td>".$donneesS['WindSpeed']." km/h</td>";
+							//Controle si la condition a été coché 
+							if ($_SESSION['WindSpeed']) 
+							{
+								echo "<td>".$donneesS['WindSpeed']." km/h</td>";
+							}
+							else
+							{
+								echo "<td>-</td>";
+							}
+							$donneesS = $reqS->fetch();
 						}
 						else
 						{
-							echo "<td>-</td>";
+							echo "<td>-</td>";	
 						}
-						$donneesS = $reqS->fetch();
-					}
-					else
-					{
-						echo "<td>-</td>";	
-					}
 
-					// fin de la ligne du tableau
-					echo "</tr>";
+						// fin de la ligne du tableau
+						echo "</tr>";
+					}
+					
 				}
 				
 				//fin du tableau
