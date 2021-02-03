@@ -10,7 +10,7 @@
 	*				Programme de base						*
 	********************************************************/
 	// On lance la session
-	session_start();
+	session_start();		
 ?>
 <!DOCTYPE html>
 <html>
