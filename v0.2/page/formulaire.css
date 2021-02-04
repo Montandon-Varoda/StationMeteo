@@ -1,7 +1,7 @@
 /****************************************
 *Titre:		Formulaire CSS				*
 *Auteur:	Maxime Montandon			*
-*Date:		25.01.2021					*
+*Date:		04.02.2021					*
 *Lieu:		Force Aérienne Payerne		*
 ****************************************/
 
@@ -112,8 +112,9 @@ footer a:hover
 	#page
 	{
 		width: auto;
-		height: auto; 
-		background-color: rgba(09,09,09,0.3);
+		height: auto;
+		margin: auto; 
+		background-color: rgba(0,0,0,0);
 	}
 
 	img
@@ -141,34 +142,56 @@ footer a:hover
 
 	section
 	{
-		font-size: 30px;
+		font-size: 50px;
 		padding-bottom: 0px;
-		width: 700px;
-		height: 1200px;
+		width: auto;
+		height: auto;
 		margin: auto; 
 	}
 
 	section h1
 	{
-		font-size: 70px;
+		font-size: 80px;
 	}
 
 	section h2
 	{
+		font-size: 60px;
+	}
+
+	section p
+	{
+		font-size: 30px;
+	}
+
+	label
+	{
 		font-size: 50px;
+	}
+
+	input[type=submit], input[type=datetime-local]
+	{
+		height: auto;
+		width: auto;
+		font-size: 40px;
+	}
+
+	input[type=checkbox]
+	{
+		height: 30px;
+		width: 30px;
 	}
 
 	/****************
 	*	Pied		*
 	****************/
-
-	footer
+	footer p
 	{
-		font-size: 30px; 
+		font-size: 20px;
 	}
 
 	footer a:hover
 	{
-		font-size: 35px; 
+		font-size: 25px;
 	}
 }
