@@ -1,0 +1,130 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+body{
+  background: #222;
+  font-family: ubuntu;
+}
+a{
+  text-decoration: none;
+}
+/**************************
+* Bouton retour
+**************************/
+.backbutton{
+  height: 8vW;
+  width: 8vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 12vw;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backText{
+  visibility: visible;
+  position: absolute;
+  top: 7vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 2vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+  height: 6vw;
+}
+.Title{
+  font-size: 8vw;
+  color: rgb(166, 166, 166);
+  position: absolute;
+  top: 5vw;
+  right: 25%;
+}
+.presentationImg{
+  opacity: 0.9;
+  width: 90%;
+  border-radius: 1vw;
+  transform: translate(-50%, -50%);
+}
+.presentationText{
+  color: rgb(240, 240, 240);
+  font-size: 6vw;
+  transform: translate(-50%, -130%);
+}
+.textBackground{
+  height: 10vw;
+  background-color: rgb(99, 99, 99);
+  opacity: 0.85;
+  transform: translate(0%, -50%);
+}
+/*Atelier*/
+#atelierImg{
+  position: absolute;
+  top: 45vw;
+  left: 50%;
+}
+#atelierText{
+  position: absolute;
+  top: 45vw;
+  left: 20%;
+  width: 13vw;
+  text-align: center;
+}
+#atelierBackgrnd{
+  position: absolute;
+  top: 45vw;
+  left: 5%;
+  width: 33vw;
+}
+
+/*Formation*/
+#formationImg{
+  position: absolute;
+  top: 76vw;
+  left: 50%;
+}
+#formationText{
+  position: absolute;
+  font-size: 6vw;
+  top: 76vw;
+  right: 20%;
+  width: 13vw;
+  text-align: center;
+}
+#formationBackgrnd{
+  position: absolute;
+  top: 76vw;
+  right: 5%;
+  width: 37vw;
+}
+
+/*Metier*/
+#metierImg{
+  position: absolute;
+  top: 108vw;
+  left: 50%;
+}
+#metierText{
+  position: absolute;
+  top: 108vw;
+  left: 20%;
+  width: 13vw;
+  text-align: center;
+}
+#metierBackgrnd{
+  position: absolute;
+  top: 108vw;
+  left: 5%;
+  width: 33vw;
+}
+.invisible{
+  position: absolute;
+  visibility: hidden;
+  top: 108vw;
+  height: 15vw;
+}

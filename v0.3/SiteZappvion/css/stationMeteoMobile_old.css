@@ -1,0 +1,351 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+body{
+  background: #222;
+}
+p{
+  font-family: 'Ubuntu';
+  color: white;
+  font-size: 4vw;
+}
+h1{
+  color: rgb(150, 150, 150);
+  position: absolute;
+  left: 5vw;
+  font-size: 7vw;
+}
+
+/**************************
+* Bouton retour
+**************************/
+.backbutton{
+  height: 10vw;
+  width: 10vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backbutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.backText{
+  visibility: visible;
+  position: relative;
+  top: 7vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 3vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+}
+/**************************
+* Page
+**************************/
+.title{
+  position: absolute;
+  top: 5vw;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Ubuntu';
+}
+.roundDiv{
+  height: 20vw;
+  width: 20vw;
+  border-radius: 50%;
+  border: solid rgb(129, 129, 129);
+  border-width: 1vw;
+  background-color: white;
+}
+
+/*Espace en fin de page*/
+.Spacer{
+    position: absolute;
+    height: 30vw;
+    top: 288vw;
+    color: rgba(0, 0, 0, 0);
+}
+
+/**************************
+* Titre Valeurs mesurées
+**************************/
+#divTitleVal{
+  position: absolute;
+  top: 15vw;
+  left: 2.5vw;
+}
+#titleVal{
+  position: relative;
+  text-align: left;
+}
+#timeVal{
+  position: relative;
+  text-align: left;
+  font-size: 3vw;
+  top: -4vw;
+}
+
+/**************************
+* Température
+**************************/
+#divTempValue{
+  position: absolute;
+  top: 18vw;
+  left: 5vw;
+}
+#titleTempValue{
+  position: relative;
+  text-align: left;
+  top: 11vw;
+  left: 24vw;
+}
+#divImgTempValue{
+  position: relative;
+}
+#imgTempValue{
+  position: relative;
+  height: 20vw;
+  left: -0.3vw;
+}
+#TempValue{
+  position: relative;
+  text-align: left;
+  width: 15vw;
+  font-size: 4vw;
+  top: -14vw;
+  left: 26vw;
+}
+
+/**************************
+* Vitesse du vent
+**************************/
+#divWdSpValue{
+  position: absolute;
+  top: 43vw;
+  left: 5vw;
+}
+#titleWdSpValue{
+  position: relative;
+  text-align: left;
+  top: 11vw;
+  left: 24vw;
+}
+#divImgWdSpValue{
+  position: relative;
+}
+#imgWdSpValue{
+  position: relative;
+  height: 16vw;
+  left: 4vw;
+  top: 1vw;
+}
+#WdSpValue{
+  position: relative;
+  text-align: left;
+  width: 25vw;
+  font-size: 4vw;
+  top: -14vw;
+  left: 26vw;
+}
+
+/**************************
+* Pluie
+**************************/
+#divRainValue{
+  position: absolute;
+  top: 68vw;
+  left: 5vw;
+}
+#titleRainValue{
+  position: relative;
+  text-align: left;
+  top: 11vw;
+  left: 24vw;
+}
+#divImgRainValue{
+  position: relative;
+}
+#imgRainValue{
+  position: relative;
+  height: 18vw;
+  left: 1vw;
+}
+#RainValue{
+  position: relative;
+  text-align: left;
+  width: 25vw;
+  font-size: 4vw;
+  top: -14vw;
+  left: 26vw;
+}
+
+/**************************
+* Humidité
+**************************/
+#divHumValue{
+  position: absolute;
+  top: 93vw;
+  left: 5vw;
+}
+#titleHumValue{
+  position: relative;
+  text-align: left;
+  top: 11vw;
+  left: 24vw;
+}
+#divImgHumValue{
+  position: relative;
+}
+#imgHumValue{
+  position: relative;
+  height: 17vw;
+  left: 1.7vw;
+  top: 0.7vw;
+}
+#HumValue{
+  position: relative;
+  text-align: left;
+  width: 25vw;
+  font-size: 4vw;
+  top: -14vw;
+  left: 26vw;
+}
+
+/**************************
+* Direction du vent
+**************************/
+#divWdDrValue{
+  position: absolute;
+  top: 118vw;
+  left: 5vw;
+}
+#titleWdDrValue{
+  position: relative;
+  text-align: left;
+  top: 11vw;
+  left: 24vw;
+}
+#divImgWdDrValue{
+  position: relative;
+}
+#imgWdDrValue{
+  position: relative;
+  height: 19vw;
+  left: 0.7vw;
+  top: 0.7vw;
+}
+#WdDrValue{
+  position: relative;
+  text-align: left;
+  width: 25vw;
+  font-size: 4vw;
+  top: -14vw;
+  left: 26vw;
+}
+
+/**************/
+/* Graphiques
+/**************/
+
+/**************************
+* Titre Graphiques
+**************************/
+#divTitleGraph{
+  position: absolute;
+  top: 160vw;
+  left: 2vw;
+}
+#titleGraph{
+  position: relative;
+  text-align: left;
+}
+
+/**************************
+* Graphique Température
+**************************/
+#divGraphTemp{
+  position: absolute;
+  top: 185vw;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+#titleGraphTemp{
+  position: relative;
+  text-align: left;
+  top: 3vw;
+}
+#imgGraphTemp{
+  position: relative;
+  border-radius: 1vw;
+  width: 100vw;
+}
+
+/**************************
+* Graphique Pluie
+**************************/
+#divGraphRain{
+  position: absolute;
+  top: 220vw;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+#titleGraphRain{
+  position: relative;
+  text-align: left;
+  top: 3vw;
+}
+#imgGraphRain{
+  position: relative;
+  border-radius: 1vw;
+  width: 100vw;
+}
+
+/**************************
+* Graphique Vitesse du vent
+**************************/
+#divGraphWdSp{
+  position: absolute;
+  top: 254vw;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+#titleGraphWdSp{
+  position: relative;
+  text-align: left;
+  top: 3vw;
+}
+#imgGraphWdSp{
+  position: relative;
+  border-radius: 1vw;
+  width: 100vw;
+}
+
+/**************************
+* Graphique Humidité
+**************************/
+#divGraphHum{
+  position: absolute;
+  top: 288vw;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+#titleGraphHum{
+  position: relative;
+  text-align: left;
+  top: 3vw;
+}
+#imgGraphHum{
+  position: relative;
+  border-radius: 1vw;
+  width: 100vw;
+}

@@ -1,0 +1,284 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+/**************************
+* Body
+**************************/
+body{
+  background: #222;
+}
+p{
+  font-family: 'Ubuntu';
+  color: white;
+  font-size: 20px;
+}
+h1{
+  color: rgb(138, 138, 138);
+  text-align: center;
+  min-width: 400px;
+}
+/**************************
+* Titre
+**************************/
+.title{
+  position: absolute;
+  top: 12vw;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Ubuntu';
+  font-size: 5.5vw;
+  width: 85vw;
+}
+
+/**************************
+* Boutons
+**************************/
+#circleButton{
+  height: 30vw;
+  width: 30vw;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/**************************
+* Bouton Météo
+**************************/
+.imgmeteo{
+  position: absolute;
+  top: 52vw;
+  left: 25%;
+  animation: aniMeteo 10s ease infinite alternate;
+  display: inline-block;
+}
+.dropdownMeteo-content {
+  visibility: hidden;
+  position: relative;
+  margin-top: -20px;
+  min-width: 200px;
+  min-height: 100px;
+  opacity: 0;
+  transition: 0.3s;
+}
+.dropdownMeteo-content:hover{
+  visibility: visible;
+  opacity: 1;
+}
+.imgmeteo:hover ~ .dropdownMeteo-content{
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
+}
+#meteoImg{
+  height: 18vw;
+  width: 18vw;
+  border-radius: 50%;
+  animation: aniMeteo 10s ease infinite alternate;
+}
+#meteoImg:hover{
+  border: 0.4vw solid rgb(182, 182, 182);
+  transition: 0.2s;
+}
+.aStation{
+    position: absolute;
+    top: 45vw;
+    left: 33.7vw;
+    transform: translate(-50%, -50%);
+}
+.stationImg{
+  position: absolute;
+  top: 27vw;
+  left: -27vw;
+  transform: translate(-50%, -50%);
+}
+.stationText{
+  font-size: 3vw;
+  position: absolute;
+  top: 33vw;
+  left: -35vw;
+  color: white;
+}
+.aNoaa{
+  position: absolute;
+  top: 45vw;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+.noaaImg{
+  position: absolute;
+  top: 27vw;
+  left: 7vw;
+  transform: translate(-50%, -50%);
+}
+.noaaText{
+  font-size: 3vw;
+  position: absolute;
+  top: 33vw;
+  left: -1vw;
+  color: white;
+}
+/**************************
+* Bouton Média
+**************************/
+.imgmedia{
+  position: absolute;
+  top: 107vw;
+  left: 25%;
+  animation: aniMedia 8s ease infinite alternate;
+  display: inline-block;
+}
+.dropdownMedia-content {
+    visibility: hidden;
+    position: relative;
+    margin-top: -20px;
+    min-width: 200px;
+    min-height: 100px;
+    opacity: 0;
+    transition: 0.3s;
+}
+.dropdownMedia-content:hover{
+  visibility: visible;
+  opacity: 1;
+}
+.imgmedia:hover ~ .dropdownMedia-content{
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
+}
+#mediaImg{
+  height: 18vw;
+  width: 18vw;
+  border-radius: 50%;
+  background-color: rgb(13, 175, 19);
+  /*animation: aniMedia 8s ease infinite alternate;*/
+}
+#mediaImg:hover{
+  border: 0.4vw solid rgb(182, 182, 182);
+  transition: 0.2s;
+}
+.aImg{
+    position: absolute;
+    top: 92vw;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+.photoImg{
+  position: absolute;
+  top: 27vw;
+  left: -27vw;
+  transform: translate(-50%, -50%);
+}
+.photoText{
+  font-size: 3vw;
+  position: absolute;
+  top: 33vw;
+  left: -35vw;
+  color: white;
+}
+.aVideo{
+    position: absolute;
+    top: 92vw;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+.videoImg{
+  position: absolute;
+  top: 27vw;
+  left: 7vw;
+  transform: translate(-50%, -50%);
+}
+.videoText{
+  font-size: 3vw;
+  position: absolute;
+  top: 33vw;
+  left: -1vw;
+  color: white;
+}
+
+/**************************
+* Bouton Download
+**************************/
+.imgdoc{
+  animation: aniDownload 12s ease infinite alternate;
+  position: absolute;
+  top: 52vw;
+  left: 75%;
+}
+.docText{
+  visibility: visible;
+  position: absolute;
+  font-size: 4vw;
+  top: 50vw;
+  left: 75%;
+  transform: translate(-70%, 290%);
+}
+
+/**************************
+* Bouton ELO
+**************************/
+.imgelo{
+  position: absolute;
+  top: 107vw;
+  left: 75%;
+}
+.eloText{
+  visibility: visible;
+  position: absolute;
+  top: 107vw;
+  left: 74%;
+  transform: translate(-60%, 240%);
+  font-size: 4vw;
+}
+
+.invisible{
+  position: absolute;
+  visibility: hidden;
+  top: 115vw;
+  height: 25vw;
+}
+
+/**************************
+* Animations
+**************************/
+@keyframes aniMeteo {
+	0% {
+		background-color: rgb(42, 58, 163);
+	}
+	50% {
+		background-color: rgb(54, 75, 207);
+	}
+	100% {
+		background-color: rgb(38, 61, 205);
+	}
+}
+@keyframes aniMedia {
+  0% {
+		background-color: rgb(13, 175, 19);
+	}
+	50% {
+		background-color: rgb(45, 177, 50);
+	}
+	100% {
+		background-color: rgb(37, 149, 41);
+	}
+}
+@keyframes aniDownload {
+  0% {
+		background-color: rgb(145, 145, 145);
+	}
+	50% {
+		background-color: rgb(126, 126, 126);
+	}
+	100% {
+		background-color: rgb(108, 108, 108);
+	}
+}
+@keyframes text {
+  0% {
+		color: rgba(199, 199, 199, 0);
+	}
+	50% {
+		color: rgba(199, 199, 199, 0.5);
+	}
+	100% {
+		color: rgba(199, 199, 199, 1);
+	}
+}

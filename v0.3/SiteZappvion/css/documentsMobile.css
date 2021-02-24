@@ -1,0 +1,84 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+/**************************
+* Page
+**************************/
+body{
+  background: #222;
+}
+h1{
+  color: rgb(150, 150, 150);
+  position: absolute;
+  left: 5vw;
+  font-size: 7vw;
+}
+
+/**************************
+* Boutons documents
+**************************/
+.fileButton{
+  display:block;
+  height: 25vw;
+  width: 90vw;
+  font-family: 'Ubuntu';
+  font-weight: bold;
+  position: relative;
+  top: 25vw;
+  font-size: 4vw;
+  border: none;
+  background-color: rgb(148, 148, 148);
+  color: white;
+  border-radius: 2vw;
+}
+.fileButton:hover{
+  background-color: rgb(69, 84, 125);
+  transition: 0.5s;
+}
+.pdfImg{
+  height: 20vw;
+  background-color: white;
+  transform: translate(15%, 10%);
+}
+.fileName{
+  position: absolute;
+  left: 18vw;
+  top: 0vw;
+  z-index: 1;
+}
+
+/**************************
+* Bouton retour
+**************************/
+.backbutton{
+  height: 10vw;
+  width: 10vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backbutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.backText{
+  visibility: visible;
+  position: relative;
+  top: 7vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 3vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+}
+.pdfImg{
+  background-color: white;
+}

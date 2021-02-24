@@ -1,0 +1,639 @@
+<?php
+include ("bdd.php");
+include ("src/jpgraph.php");
+include ("src/jpgraph_canvas.php");
+include ("src/jpgraph_canvtools.php");
+
+date_default_timezone_set('UTC');
+
+//Défini la tranche à lire
+//Si une requête sur un jour / heure précis est envoyée
+//Par défaut: date & heure actuelle.
+if (isset($_GET['hoursToRead'])){
+  define("HOURSTOREAD", $_GET['hoursToRead']);
+}else{
+  define("HOURSTOREAD", 24);
+}
+if (isset($_GET['dayToRead'])){
+  define("DAYTOREAD", $_GET['dayToRead']);
+}else{
+  define("DAYTOREAD", date("Y-m-d"));
+}
+
+
+//Défini les dimensions du graphique
+define("WINDOWSSIZE", 700);
+
+define("SIZE", WINDOWSSIZE / 2.4);
+// / 2.4 definit la grosseur de la rose des vents
+
+define("OCTOGONESIDE", tan(22.5 * (3.14 / 180)) * SIZE * 2);
+//* 2 regle la longueur des 24 carrés
+
+define("SQUARESIZE", OCTOGONESIDE / 24);
+// definit les 24 carrés sur la tangente (12 dessine que 12 sur la tangente)
+
+//Réglage des flèches
+define("ARROWSIZE", 5);
+
+//Define des Couleur
+define("COLORS", [
+  "darkgreen",
+  "yellow",
+  "red" 
+  ]);
+  
+//Defini les categories de vents
+define("SPEEDCATEGORIES",[
+  3,
+  6,
+  12,
+  20,
+  29,
+  39,
+  50,
+  62,
+  75,
+  89,
+  102,
+]);
+
+
+////**** TRAITEMENT DES DONNEES ****////
+
+//Récupère la date à lire
+$day = DAYTOREAD;
+$hours = HOURSTOREAD;
+//Check si les heures ne dépassent pas
+if ($hours > 24){
+  $hours = 24;
+}
+//Calcule le nombre de mesure éventuelle à prendre en compte
+$ts = strtotime(DAYTOREAD) + $hours * 3600;
+
+//ReConversion en date
+$day = date("Y-m-d H:i:s", strtotime(DAYTOREAD));
+$dayHours = date("Y-m-d H:i:s", $ts);
+
+//Récupèration les données de vitesse / dj ajout après - TimeStamp < le =
+$query = "SELECT * FROM WindSpeed WHERE TimeStamp >= \"".$day."\" AND TimeStamp <= \"".$dayHours."\";";
+$repWindSpeed = $bdd->query($query);
+
+//Récupèration les données de directions / dj ajout après - TimeStamp < le =
+$query = "SELECT * FROM WindDirection WHERE TimeStamp >= \"".$day."\" AND TimeStamp <= \"".$dayHours."\";";
+$repWindDir = $bdd->query($query);
+
+////**** CREATION DES CLASSES ****////
+
+/*
+* Cette classe sert à mémoriser une donnée par rapport à un temps.
+*/
+class Data
+{
+    public $timeStamp;
+    public $data;
+}
+
+/*
+* Cette classe permet d'enregistrer une donnée de vitesse de vent
+* ainsi que sa direcion.
+*/
+class DataWind
+{
+    public $timeStamp;
+    public $speed;
+    public $direction;
+}
+
+/*
+* Cette classe permet de stocker toutes les infos nécessaires
+* pour une direction donnée.
+* On pourra ensuite dessiner le triangle corréspondant juste à l'aide
+* de cette classe.
+*/
+class DataCardinal
+{
+  public $name; //Nom de la direction ("N", "NE", etc...)
+  public $averageSpeed; //Vitesse moyenne dans cette direction
+  public $maxSpeed; //Vitesse max dans cette direction
+  public $speedHistory = [24];  //Historique des vitesses max / h dans cette direction
+
+  public $maxSpeedCat;  //Catégorie de vitesse max (0 à 11)
+
+  function __construct($name)
+  {
+    $this->name = $name;
+    //Met tout le tableau des 24h à zéro
+    for ($i=0; $i < 24; $i++) {
+      $this->speedHistory[$i] = 0;
+    }
+  }
+}
+
+//Création des données de directions
+$dataDirections = array();
+
+//Création des données de vitesse
+$dataSpeeds = array();
+
+//Création du tableau de données général (Vitesse et direction)
+$dataWinds = array();
+
+//Création des objets finaux
+$dataCardinals = array();
+
+//Creation des instances pour chacune des directions
+$dataCardinals[] = new DataCardinal("N");
+$dataCardinals[] = new DataCardinal("NE");
+$dataCardinals[] = new DataCardinal("E");
+$dataCardinals[] = new DataCardinal("SE");
+$dataCardinals[] = new DataCardinal("S");
+$dataCardinals[] = new DataCardinal("SW");
+$dataCardinals[] = new DataCardinal("W");
+$dataCardinals[] = new DataCardinal("NW");
+
+//Remplissage des tableaux de données concernant la vitesse des vents
+while (($data = $repWindSpeed->fetch()) !== false) {
+  $dataSpeed = new Data();
+
+  $dataSpeed->timeStamp = strtotime(($data['TimeStamp']));
+  $dataSpeed->data = ($data['WindSpeed']);
+  $dataSpeeds[] = $dataSpeed;
+}
+
+//Remplissage des tableaux de données concernant la direction des vents
+while (($data = $repWindDir->fetch()) !== false) {
+  $dataDirection = new Data();
+
+  $dataDirection->timeStamp = strtotime(($data['TimeStamp']));;
+  $dataDirection->data = ($data['WindDirection']);
+  $dataDirections[] = $dataDirection;
+}
+
+
+/*
+* Cette partie consiste à remplir le tableau des (vents & dir) / temps. Pour ce faire,
+* Le système va parcourir toutes les vitesses mesurées et pour chacunes, déterminer
+* la direction dans laquelle le vent soufflait.
+*
+* ex:
+* Vitesse:    13:35:10 = 3km/h
+*             13:36:30 = 0km/h
+*             13:50:15 = 3km/h
+*
+* Direction:  13:30:00 = "N"
+*             13:50:10 = "NE"
+*
+* Mesures Mixtes:
+* 1:
+* Vitesse:      3km/h
+* Direction:    "N"
+* TimeStamp:    13:35:10
+*
+* 2:
+* Vitesse:      0km/h
+* Direction:    "N"
+* TimeStamp:    13:36:30
+*
+* 3:
+* Vitesse:      3km/h
+* Direction:    "NE"
+* TimeStamp:    13:50:15
+*/
+//Parcours toutes les vitesses enregistrées
+for ($i=0; $i < sizeof($dataSpeeds); $i++) {
+  //Création d'une nouvelle instance
+  $dataWind = new DataWind();
+  //Défini la vitesse
+  $dataWind->speed = $dataSpeeds[$i]->data;
+  //Définition du temps
+  $dataWind->timeStamp = $dataSpeeds[$i]->timeStamp;
+  //Défini la direction
+  $j = 0;
+  //Trouve dans quel échellon de direction la vitesse se trouve.
+  while ($j < sizeof($dataDirections) - 1 && $dataWind->timeStamp >= $dataDirections[$j]->timeStamp){
+    $j++;
+  }
+  //Si plus d'une direction à été enregistrée:
+  if ($j > 0){
+    $dataWind->direction = $dataDirections[$j - 1]->data;
+    //Ajoute la donnée au tableau
+    $dataWinds[] = $dataWind;
+  }else{
+    //Ne fais rien
+  }
+
+}
+
+
+/*
+* Cette partie va servir à transformer les données de "dataWinds"
+* en donnée de "dataCardinal" ce qui signifie que le but est d'attribuer
+* à chacune des 8 positions cardinales leurs attributs (voir plus haut).
+*
+* Si je reprends mon exemple plus haut:
+*
+* 1:
+* Vitesse:      3km/h
+* Direction:    "N"
+* TimeStamp:    13:35:10
+*
+* 2:
+* Vitesse:      0km/h
+* Direction:    "N"
+* TimeStamp:    13:36:30
+*
+* 3:
+* Vitesse:      3km/h
+* Direction:    "NE"
+* TimeStamp:    13:50:15
+*
+* On peut donc en déduire que:
+* 1:  Durée:      00:01:20
+*     Vitesse:    3km/h
+*     Direction:  "N"
+*
+* 2:  Durée:      00:13:25
+*     Vitesse:    0km/h
+*     Direction:  "N"
+*
+* 2:  Durée:      13:50:15 -> maintenant
+*     Vitesse:    3km/h
+*     Direction:  "NE"
+*
+* C'est de cette manière que je peux définir la vitesse max ainsi que la moyenne
+* pour chacunes des directions.
+*/
+//Parcours toutes les données mixtes
+for ($i = 0; $i < sizeof($dataWinds) - 1; $i++) {
+  //Récupere la tranche d'heure 0 à 23
+  $hour = (round(date("H", $dataWinds[$i]->timeStamp)));
+
+  //Récupere la durée du vent
+  $duration = $dataWinds[$i + 1]->timeStamp - $dataWinds[$i]->timeStamp;
+
+  //Récupere la vitesse du vent
+  $speed = $dataWinds[$i]->speed;
+
+  //Récupere la direction du vent
+  $direction = $dataWinds[$i]->direction;
+
+  //Test la direction
+  switch($direction){
+    case "N":
+      //Attribue la valeur max du jour
+      if ($dataCardinals[0]->maxSpeed < $speed){
+        $dataCardinals[0]->maxSpeed = $speed;
+      }
+      //Attribue la valeur max des vents par heure
+      if ($dataCardinals[0]->speedHistory[$hour] < $speed){
+        $dataCardinals[0]->speedHistory[$hour] = $speed;
+      }
+      //Attribue la moyenne des vents par jour
+      $dataCardinals[0]->averageSpeed += ($speed / 3.6) * $duration; //(m/s)
+      break;
+    case "NE":
+    //Attribue la valeur max du jour
+    if ($dataCardinals[1]->maxSpeed < $speed){
+      $dataCardinals[1]->maxSpeed = $speed;
+    }
+    //Attribue la valeur max des vents par heure
+    if ($dataCardinals[1]->speedHistory[$hour] < $speed){
+      $dataCardinals[1]->speedHistory[$hour] = $speed;
+    }
+    //Attribue la moyenne des vents par jour
+    $dataCardinals[1]->averageSpeed += $speed  / 3.6; //(m/s)
+      break;
+    case "E":
+    //Attribue la valeur max du jour
+    if ($dataCardinals[2]->maxSpeed < $speed){
+      $dataCardinals[2]->maxSpeed = $speed;
+    }
+    //Attribue la valeur max des vents par heure
+    if ($dataCardinals[2]->speedHistory[$hour] < $speed){
+      $dataCardinals[2]->speedHistory[$hour] = $speed;
+    }
+    //Attribue la moyenne des vents par jour
+    $dataCardinals[2]->averageSpeed += ($speed / 3.6) * $duration; //(m/s)
+      break;
+    case "SE":
+    //Attribue la valeur max du jour
+    if ($dataCardinals[3]->maxSpeed < $speed){
+      $dataCardinals[3]->maxSpeed = $speed;
+    }
+    //Attribue la valeur max des vents par heure
+    if ($dataCardinals[3]->speedHistory[$hour] < $speed){
+      $dataCardinals[3]->speedHistory[$hour] = $speed;
+    }
+    //Attribue la moyenne des vents par jour
+    $dataCardinals[3]->averageSpeed += ($speed / 3.6) * $duration; //(m/s)
+      break;
+    case "S":
+    //Attribue la valeur max du jour
+    if ($dataCardinals[4]->maxSpeed < $speed){
+      $dataCardinals[4]->maxSpeed = $speed;
+    }
+    //Attribue la valeur max des vents par heure
+    if ($dataCardinals[4]->speedHistory[$hour] < $speed){
+      $dataCardinals[4]->speedHistory[$hour] = $speed;
+    }
+    //Attribue la moyenne des vents par jour
+    $dataCardinals[4]->averageSpeed += ($speed / 3.6) * $duration; //(m/s)
+      break;
+    case "SW":
+    //Attribue la valeur max du jour
+    if ($dataCardinals[5]->maxSpeed < $speed){
+      $dataCardinals[5]->maxSpeed = $speed;
+    }
+    //Attribue la valeur max des vents par heure
+    if ($dataCardinals[5]->speedHistory[$hour] < $speed){
+      $dataCardinals[5]->speedHistory[$hour] = $speed;
+    }
+    //Attribue la moyenne des vents par jour
+    $dataCardinals[5]->averageSpeed += ($speed / 3.6) * $duration; //(m/s)
+      break;
+    case "W":
+    //Attribue la valeur max du jour
+    if ($dataCardinals[6]->maxSpeed < $speed){
+      $dataCardinals[6]->maxSpeed = $speed;
+    }
+    //Attribue la valeur max des vents par heure
+    if ($dataCardinals[6]->speedHistory[$hour] < $speed){
+      $dataCardinals[6]->speedHistory[$hour] = $speed;
+    }
+    //Attribue la moyenne des vents par jour
+    $dataCardinals[6]->averageSpeed += ($speed / 3.6) * $duration; //(m/s)
+      break;
+    case "NW":
+    //Attribue la valeur max du jour
+    if ($dataCardinals[7]->maxSpeed < $speed){
+      $dataCardinals[7]->maxSpeed = $speed;
+    }
+    //Attribue la valeur max des vents par heure
+    if ($dataCardinals[7]->speedHistory[$hour] < $speed){
+      $dataCardinals[7]->speedHistory[$hour] = $speed;
+    }
+    //Attribue la moyenne des vents par jour
+    $dataCardinals[7]->averageSpeed += ($speed / 3.6) * $duration; //(m/s);
+      break;
+  }
+}
+
+//La durée total des mesures corréspond au temps écoulé entre la première et la dernière mesure
+$totalDuration = $dataWinds[sizeof($dataWinds) - 1]->timeStamp - $dataWinds[0]->timeStamp;
+
+
+//Defini les moyennes
+foreach ($dataCardinals as &$dataCardinal) {
+    //Moyenne (m/s)
+    $dataCardinal->averageSpeed /= $totalDuration;
+    //Transformation en km/h
+    $dataCardinal->averageSpeed *= 3.6;
+}
+
+////**** AFFICHAGE DES DONNEES SUR LE GRAPHIQUE ****////
+//Creation d'un canvas
+$g = new CanvasGraph(WINDOWSSIZE,WINDOWSSIZE,'auto');
+$g->SetMargin(0,0,0,0);
+
+$g->InitFrame();
+$g->img->SetColor("#222222");
+$g->img->FilledRectangle(0, 0, WINDOWSSIZE, WINDOWSSIZE);
+
+//** FONCTIONS UTILES **//
+
+/*
+* Cette fonction permet d'avoir un affichage numériques des valeurs moyennes
+* et max d'une tranche donnée.
+*
+* Elle n'est pas indispensable à l'affichage du graphique mais est présente comme
+* Supplément.
+*/
+function writeRawValues($dataCardinals, $dataWinds){
+
+  echo("<h1>Valeurs des vents</h1>");
+  echo("<h3>Date: ".DAYTOREAD. "</h3>"); #".date("d/m/Y")."
+  echo("<h2>Moyennes/Max</h2>");
+  echo("<style>
+          table, th, td
+          {
+            border: 1px solid black;
+            font-size: 20px;
+          }
+          td, th
+          {
+            background-color: #F0F0F0;
+          }
+          h2, h1
+          {
+            text-decoration: underline;
+            margin-bottom: 5px;
+          }
+          h3
+          {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-weight: lighter;
+            font-size: 20px;
+          }
+        </style>");
+
+  $table = "<table>
+              <tr>
+                <th>Direction</th>
+                <th>Moyenne (km/h)</th>
+                <th>Max (km/h)</th>
+              </tr>";
+  echo($table);
+  for ($i=0; $i < 8; $i++) {
+    echo("<tr>
+            <td>".$dataCardinals[$i]->name."</td>
+            <td>".round($dataCardinals[$i]->averageSpeed,2)."</td>
+            <td>".round($dataCardinals[$i]->maxSpeed)."</td>
+          </tr>");
+  }
+  echo("</table>");
+
+  //Affiche toutes les mesures de vents détaillées
+  echo("<h2>Mesures Détaillées</h2>");
+  //Affiche nb de mesures, temps total.
+  echo("<h3>Mesures:     ".sizeof($dataWinds)."</h3>");
+  echo("<h3>Temps Total: ".date("H:i:s",$dataWinds[sizeof($dataWinds) - 1]->timeStamp - $dataWinds[0]->timeStamp)."</h3>");
+  //Affiche la table
+  $table = "<table>
+              <tr>
+                <th>Direction</th>
+                <th>Vitesse (km/h)</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Durée</th>
+              </tr>";
+  echo($table);
+  //Affichage des valeures
+  for ($i= sizeof($dataWinds) - 2; $i > 0; $i--) {
+    echo("<tr>
+            <td>".$dataWinds[$i]->direction."</td>
+            <td>".round($dataWinds[$i]->speed)."</td>
+            <td>".date("H:i:s",$dataWinds[$i]->timeStamp)."</td>
+            <td>".date("H:i:s",$dataWinds[$i + 1]->timeStamp)."</td>
+            <td>".date("H:i:s",$dataWinds[$i + 1]->timeStamp - $dataWinds[$i]->timeStamp)."</td>
+          </tr>");
+  }
+}
+
+/*
+* Decale des valeurs pour simplifier les calculs
+*/
+function translate($array){
+  for ($i=0; $i < sizeof($array); $i++) {
+    $array[$i] += WINDOWSSIZE / 2;
+  }
+  return $array;
+}
+
+/*
+* Dessine un simple triangle
+*/
+function drawTriangle($g, $height, $color){
+
+  //Défini la hauteur du triangle
+  $adj = $height;
+  //Défini les 3 points du triangle
+  $hyp = $adj / cos(22.5 * (3.14 / 180));
+  $opp = $hyp * sin(22.5 * (3.14 / 180));
+
+  //Dessine le triangle
+  $g->img->SetColor($color);
+  $pos = array(0,0 , -$opp, -$adj, $opp, -$adj, 0,0);
+  $pos = translate($pos);
+  $g->img->Polygon($pos);
+}
+
+/*
+* Dessine un triangle (plein)
+*/
+function fillTriangle($g, $height, $color){
+
+  //Défini la hauteur du triangle
+  $adj = $height;
+  //Défini les 3 points du triangle
+  $hyp = $adj / cos(22.5 * (3.14 / 180));
+  $opp = $hyp * sin(22.5 * (3.14 / 180));
+
+  //Dessine le triangle
+  $g->img->SetColor($color);
+  $pos = array(0,0 , -$opp, -$adj, $opp, -$adj, 0,0);
+  $pos = translate($pos);
+  $g->img->FilledPolygon($pos);
+}
+
+/*
+* Dessine l'historique des carrés au dessus du triangle
+*/
+function drawSquares($g, $arraySquares){
+  //Défini la poisition du "Top Left Corner"
+  $topLeft = [WINDOWSSIZE / 2 - OCTOGONESIDE / 2, (WINDOWSSIZE / 2 - SIZE)];
+  $bottomRight = [$topLeft[0] + SQUARESIZE, $topLeft[1] - SQUARESIZE];
+  //Dessine les 24 carrés
+  for ($i=0; $i < 24; $i++) {
+    //Vert
+    if ($arraySquares[$i] >= 3 && $arraySquares[$i] <= 28){
+        $g->img->SetColor(COLORS[0]);
+    }
+    //Jaune
+    else if ($arraySquares[$i] >= 29 && $arraySquares[$i] <= 61){
+        $g->img->SetColor(COLORS[1]);
+    }
+    //Rouge
+    else if ($arraySquares[$i] >= 62 && $arraySquares[$i] <= 400){
+        $g->img->SetColor(COLORS[2]);
+    }else{
+        $g->img->SetColor("#555555");
+    }
+
+    $g->img->FilledRectangle($topLeft[0], $topLeft[1], $bottomRight[0], $bottomRight[1]);
+
+    //Dessine le contour blanc toute les 6h
+    if ($i % 6 == 0 && $i > 0){
+      $g->img->SetColor("#FFFFFF");
+    }else {
+      $g->img->SetColor("black");
+    }
+    $g->img->Rectangle($topLeft[0], $topLeft[1], $bottomRight[0], $bottomRight[1]);
+
+    $topLeft[0] += SQUARESIZE;
+    $bottomRight[0] += SQUARESIZE;
+  }
+}
+
+/*
+* Fonction qui dessine une flèche indiquant la vitesse moyenne du vent
+*/
+function drawArrow($g, $height){
+  //Define the top position
+  $topPos = [WINDOWSSIZE / 2, WINDOWSSIZE / 2 - $height];
+  //Draws the line
+  $g->img->FilledRectangle(WINDOWSSIZE / 2 - 2, WINDOWSSIZE / 2, $topPos[0] + 2, $topPos[1]);
+}
+
+
+/*
+* Fonction qui dessine un triangle complet avec les graduations
+*/
+function drawWrTriangle($g, $data){
+  //Ecrit le text du point cardinal
+  $txt=$data->name;
+  $t = new Text($txt,300,SIZE / 2);
+  $t->SetFont(FF_FONT2,FS_BOLD,10);
+  $t->SetPos(WINDOWSSIZE / 2, 15);
+  $t->SetColor("#AAAAAA");
+
+  $t->Stroke($g->img);
+
+  //Dessine tous les triangles
+  $space = SIZE / 11;
+
+  //Dessine les de couleur
+  for ($i=10; $i >= 0; $i--) {
+    if ($data->maxSpeed >= SPEEDCATEGORIES[$i]){
+      if ($i <= 3){
+        fillTriangle($g, ($i + 1) * $space, COLORS[0]);
+      }else if ($i <= 6){
+        fillTriangle($g, ($i + 1) * $space, COLORS[1]);
+      }else if ($i < 12){
+        fillTriangle($g, ($i + 1) * $space, COLORS[2]);
+      }
+    }
+  }
+
+  //Dessine les triangles noirs
+  for ($i=1; $i < 12; $i++) {
+    drawTriangle($g, $i * $space, "#000000");
+    drawSquares($g, $data->speedHistory);
+  }
+
+  //Dessine la flèche au bon endroit
+  for ($i = 0; $data->averageSpeed >= SPEEDCATEGORIES[$i]; $i++){
+
+  }
+
+  drawArrow($g, $i * $space);
+}
+
+//Dessine l'octogone
+for ($i=1; $i < 9; $i++) {
+  drawWrTriangle($g, $dataCardinals[$i - 1]);
+  $g->img->SetAngle($i * 45);
+}
+
+//On a la possibilitée d'avoir les infos en litéral.
+if (isset($_GET['view'])){
+  if ($_GET['view'] == "raw"){
+    writeRawValues($dataCardinals, $dataWinds);
+  }else{
+    $g->Stroke();
+  }
+}else{
+  $g->Stroke();
+}
+?>

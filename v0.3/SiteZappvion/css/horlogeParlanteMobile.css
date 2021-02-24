@@ -1,0 +1,374 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+body{
+  background: #222;
+  font-family: ubuntu;
+  overflow-x: hidden;
+}
+a{
+  text-decoration: none;
+  color: rgb(166, 166, 166);
+  font-size: 2.5vw;
+  text-align: center;
+}
+a:hover{
+  text-decoration: underline;
+  color: rgb(100, 100, 100);
+}
+p{
+  color: rgb(166, 166, 166);
+  font-size: 2.5vw;
+  text-align: center;
+}
+/**************************
+* Bouton retour
+**************************/
+
+.backbutton{
+  height: 5vw;
+  width: 5vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backbutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.backbutton:hover .backText{
+  visibility: visible;
+  transition: 0.2s;
+}
+.backText{
+  visibility: hidden;
+  position: relative;
+  top: 3.5vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 1.3vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+  height: 3vw;
+}
+
+/**************************
+* Bouton menu
+**************************/
+
+.menubutton{
+  height: 5vw;
+  width: 5vw;
+  border-radius: 50%;
+  position: absolute;
+  left: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.menubutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.menubutton:hover .menuText{
+  visibility: visible;
+  transition: 0.2s;
+}
+.menuText{
+  visibility: hidden;
+  position: relative;
+  top: 3.5vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 1.3vw;
+}
+.menuimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  left: 53%;
+  bottom: 50%;
+  height: 5vw;
+}
+
+/**************************
+* Page
+**************************/
+.Title{
+  font-size: 4vw;
+  color: rgb(166, 166, 166);
+  text-align: center;
+  text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+
+.Clock{
+  font-size: 3vw;
+  color: rgb(166, 166, 166);
+  text-align: center;
+  text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+
+.roundDiv{
+  height: 10vw;
+  width: 10vw;
+  border-radius: 50%;
+  border: solid rgb(129, 129, 129);
+  border-width: 0.5vw;
+  background-color: white;
+}
+
+/*Espace en fin de page*/
+.Spacer{
+    position: absolute;
+    height: 20vw;
+    top: 184vw;
+    color: rgba(0, 0, 0, 0);
+}
+
+/**************************
+* index.php
+**************************/
+
+.TextDescription{
+	text-align: justify;
+	font-size: 2vw;
+	margin-left: 5vw;
+	margin-right: 5vw;
+}
+
+.PhotoStation{
+	position: relative;
+	float: left;
+	padding: 10px;
+	height: auto;
+	width: 50vw;
+}
+
+.ListCaracteristiques{
+	position: relative;
+	font-size: 2.5vw;
+	left: 1vw;
+	padding: 10px;
+	text-align: left;
+	flex-wrap: wrap;
+}
+
+.TitreDiv{
+	clear: left;
+	padding-top: 2vw;
+	position: relative;
+	font-size: 3.5vw;
+	color: rgb(166, 166, 166);
+	text-align: center;
+	margin-left: 3vw;
+	text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+
+.ImgCmdDTMF{
+	height: auto;
+	width: 90vw;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.FrameYoutube{
+	max-height: 60vw;
+	max-width: 90vw;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+/* Images propagation et carte en bas de page */
+.CarteFooter{
+	position: relative;
+	width: auto;
+	height: 27vw;
+	padding: 5px;
+	padding-top: 15vw;
+	
+}
+
+
+/**************************
+* docTech.php
+**************************/
+.TitreTOC{
+	clear: left;
+	padding-top: 2vw;
+	position: relative;
+	font-size: 3.5vw;
+	color: rgb(166, 166, 166);
+	text-align: left;
+	margin-left: 3vw;
+	text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+.TOC ul{
+  list-style-type: none;
+}
+.TitreSec2 {
+	clear: left;
+	padding-top: 2vw;
+	position: relative;
+	font-size: 3vw;
+	color: rgb(166, 166, 166);
+	text-align: left;
+	margin-left: 3vw;
+	text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+.TitreSec3 {
+	clear: left;
+	padding-top: 2vw;
+	position: relative;
+	font-size: 2.5vw;
+	color: rgb(166, 166, 166);
+	text-align: left;
+	margin-left: 3vw;
+	text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+.TitreSec4 {
+	clear: left;
+	padding-top: 2vw;
+	position: relative;
+	font-size: 2vw;
+	color: rgb(166, 166, 166);
+	text-align: left;
+	margin-left: 3vw;
+	text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+.txtDoc{
+	font-size: 2vw;
+	text-align: justify;
+	margin-left: 4vw;
+	margin-right: 4vw;
+}
+
+.ImgCenter{
+	height: auto;
+	width: 90vw;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.ImgCenterS{
+	max-height: 30vw;
+	height: auto;
+	max-width: 90vw;
+	width:auto;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.ImgLeft{
+	height: auto;
+	width: 45vw;
+	left: 5vw;
+	float: left;
+}
+
+.ImgRight{
+	height: auto;
+	width: 45vw;
+	right: 5vw;
+	float: right;
+}
+
+/**************************
+* historique.php
+**************************/
+
+.TableHistorique{
+	width:90vw;
+	color: rgb(166, 166, 166);
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	text-align: left;
+	font-size: 2vw;
+}
+
+.TableHistorique th {
+	font-size: 2.5vw;
+	text-align: left;
+	padding: 1vw;
+}
+
+.TableHistorique td {
+	padding: 1vw;
+}
+
+/**************************
+* logbook.php
+**************************/
+
+.TitreSection {
+	clear: left;
+	padding-top: 2vw;
+	position: relative;
+	font-size: 3vw;
+	color: rgb(166, 166, 166);
+	text-align: left;
+	margin-left: 3vw;
+	text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+
+.ValeurActuelle {
+	clear: left;
+	padding-top: 2vw;
+	position: relative;
+	font-size: 2.5vw;
+	color: rgb(166, 166, 166);
+	text-align: left;
+	margin-left: 7vw;
+}
+
+/**************************
+* Menu.php
+* Depuis https://www.w3schools.com/howto/howto_js_sidenav.asp
+**************************/
+/* The side navigation menu */
+.HPMenu {
+	height: 100%; /* 100% Full-height */
+	width: 0; /* 0 width - change this with JavaScript */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Stay on top */
+	top: 0; /* Stay at the top */
+	left: 0;
+	background-color: #111; /* Black*/
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 60px; /* Place content 60px from the top */
+	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.HPMenu a {
+	text-decoration: none;
+	color: rgb(166, 166, 166);
+	font-size: 2.5vw;
+	text-align: left;
+	margin-left: 2vw;
+	display: block;
+	transition: 0.3s;
+}
+
+/* Position and style the close button (top right corner) */
+.HPMenu .Closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 4vw;
+	margin-left: 50px;
+}

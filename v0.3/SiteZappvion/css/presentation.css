@@ -1,0 +1,160 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+body{
+  background: #222;
+  font-family: ubuntu;
+}
+a{
+  text-decoration: none;
+}
+/**************************
+* Bouton retour
+**************************/
+
+.backbutton{
+  height: 5vw;
+  width: 5vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backbutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.backbutton:hover .backText{
+  visibility: visible;
+  transition: 0.2s;
+}
+.backText{
+  visibility: hidden;
+  position: relative;
+  top: 3.5vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 1.3vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+  height: 3vw;
+}
+.Title{
+  font-size: 4vw;
+  color: rgb(166, 166, 166);
+  text-align: center;
+  text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+.presentationImg{
+  opacity: 0.9;
+  height: 15vw;
+  border-radius: 1vw;
+}
+.presentationText{
+  color: rgb(240, 240, 240);
+  font-size: 4vw;
+}
+.textBackground{
+  height: 8vw;
+  width: 25vw;
+  background-color: rgb(99, 99, 99);
+  opacity: 0.85;
+}
+/*Atelier*/
+#atelierImg{
+  position: absolute;
+  top: 13vw;
+  left: 7vw;
+}
+#atelierText{
+  position: absolute;
+  top: 15vw;
+  left: 12vw;
+  width: 13vw;
+  text-align: center;
+}
+#atelierBackgrnd{
+  position: absolute;
+  top: 17vw;
+  left: 7vw;
+  width: 20vw;
+}
+#atelier:hover #atelierImg{
+  opacity: 0.5;
+  transition: 0.4s;
+}
+#atelier:hover #atelierBackgrnd{
+  opacity: 1;
+  transition: 0.4s;
+}
+
+/*Formation*/
+#formationImg{
+  position: absolute;
+  top: 31vw;
+  right: 7vw;
+}
+#formationText{
+  position: absolute;
+  font-size: 3.5vw;
+  top: 33.5vw;
+  right: 14vw;
+  width: 13vw;
+  text-align: center;
+}
+#formationBackgrnd{
+  position: absolute;
+  top: 35vw;
+  right: 7vw;
+  width: 22vw;
+}
+#formation:hover #formationImg{
+  opacity: 0.5;
+  transition: 0.4s;
+}
+#formation:hover #formationBackgrnd{
+  opacity: 1;
+  transition: 0.4s;
+}
+
+/*Metier*/
+#metierImg{
+  position: absolute;
+  top: 49vw;
+  left: 7vw;
+}
+#metierText{
+  position: absolute;
+  top: 51vw;
+  left: 12vw;
+  width: 13vw;
+  text-align: center;
+}
+#metierBackgrnd{
+  position: absolute;
+  top: 53vw;
+  left: 7vw;
+  width: 20vw;
+}
+#metier:hover #metierImg{
+  opacity: 0.5;
+  transition: 0.4s;
+}
+#metier:hover #metierBackgrnd{
+  opacity: 1;
+  transition: 0.4s;
+}
+.invisible{
+  position: absolute;
+  visibility: hidden;
+  top: 60vw;
+  height: 8vw;
+}

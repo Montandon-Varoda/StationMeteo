@@ -1,0 +1,198 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+body{
+  background: #222;
+  font-family: ubuntu;
+  overflow-x: hidden;
+}
+a{
+  text-decoration: none;
+}
+p{
+  color: rgb(166, 166, 166);
+  font-size: 2.5vw;
+  text-align: center;
+}
+/**************************
+* Bouton retour
+**************************/
+
+.backbutton{
+  height: 5vw;
+  width: 5vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backbutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.backbutton:hover .backText{
+  visibility: visible;
+  transition: 0.2s;
+}
+.backText{
+  visibility: hidden;
+  position: relative;
+  top: 3.5vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 1.3vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+  height: 3vw;
+}
+/**************************
+* Page
+**************************/
+.Title{
+  font-size: 4vw;
+  color: rgb(166, 166, 166);
+  text-align: center;
+  text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+
+/**************************
+* Formation
+**************************/
+#divFormation{
+  position: absolute;
+  top: 17vw;
+  height: 25vw;
+}
+#formationImg{
+  position: relative;
+  height: 22vw;
+  border-radius: 1.5vw;
+  left: -14.8vw;
+}
+#formationText{
+  position: relative;
+  transform: translate(-50%, -50%);
+  left: 74.5vw;
+  width: 42vw;
+  top: -14vw;
+}
+/**************************
+* EPSIC
+**************************/
+#divEPSIC{
+  position: absolute;
+  top: 45vw;
+  height: 25vw;
+}
+#EPSICImg{
+  position: relative;
+  height: 21.8vw;
+  border-radius: 1.5vw;
+  left: 55vw;
+}
+#EPSICText{
+  position: relative;
+  transform: translate(-50%, -50%);
+  left: 25.5vw;
+  width: 40vw;
+  top: -14vw;
+}
+/**************************
+* Examen
+**************************/
+#divExamen{
+  position: absolute;
+  top: 73vw;
+  height: 45vw;
+  width: 99vw;
+}
+#examenText{
+  position: relative;
+  left: -6.5vw;
+  top: -1vw;
+}
+#prodImg{
+  position: relative;
+  width: 25vw;
+  border-radius: 1.5vw;
+  transform: translate(-50%, 0%);
+  left: 18%;
+}
+#prodText{
+  position: relative;
+  transform: translate(-50%, -50%);
+  left: 14vw;
+  top: 0vw;
+}
+#mesureImg{
+  position: relative;
+  width: 25vw;
+  border-radius: 1.5vw;
+  transform: translate(-50%, 0%);
+  left: 48.5%;
+  top: -12vw;
+}
+#mesureText{
+  position: relative;
+  transform: translate(-50%, -50%);
+  left: 42vw;
+  top: -36vw;
+}
+#microImg{
+  position: relative;
+  width: 25vw;
+  border-radius: 1.5vw;
+  transform: translate(-50%, 0%);
+  top: -53.8vw;
+  left: 80%;
+}
+#microText{
+  position: relative;
+  transform: translate(-50%, -50%);
+  left: 78vw;
+  top: -54vw;
+}
+/**************************
+* EPSIC
+**************************/
+#divStages{
+  position: absolute;
+  top: 120vw;
+  height: 35vw;
+  width: 99vw;
+}
+#aerodromeImg{
+  position: relative;
+  height: 24vw;
+  border-radius: 1.5vw;
+  left: -5vw;
+}
+#aerodromeText{
+  position: relative;
+  transform: translate(-50%, -50%);
+  left: 67vw;
+  width: 53vw;
+  top: -15vw;
+}
+#meteoImg{
+  position: relative;
+  height: 24vw;
+  border-radius: 1.5vw;
+  left: 55vw;
+  top: -4vw;
+}
+#meteoText{
+  position: relative;
+  transform: translate(-50%, -50%);
+  left: 25vw;
+  width: 40vw;
+  top: -19vw;
+}

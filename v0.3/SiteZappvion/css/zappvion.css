@@ -1,0 +1,327 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+/**************************
+* Global
+**************************/
+html{
+  min-height: 500px;
+}
+body{
+  background-image: url("../background.jpg");
+  background-color: #222;
+  height: 100%;
+  background-position: center;
+  background-origin: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+p{
+  font-family: 'Ubuntu';
+  color: white;
+  font-size: 20px;
+}
+h1{
+  color: rgb(138, 138, 138);
+  text-align: center;
+  min-width: 100px;
+}
+/**************************
+* Titre
+**************************/
+.title{
+  position: absolute;
+  top: 5vw;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Ubuntu';
+  font-size: 2.5vw;
+}
+
+/**************************
+* Boutons
+**************************/
+#circleButton{
+  height: 11.7vw;
+  width: 11.7vw;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+#circleButton:hover{
+  border: 0.4vw solid rgb(182, 182, 182);
+  transition: 0.2s;
+}
+
+/**************************
+* Bouton Météo
+**************************/
+.imgmeteo{
+  position: absolute;
+  top: 18vw;
+  left: 35vw;
+  animation: aniMeteo 10s ease infinite alternate;
+  display: inline-block;
+}
+.dropdownMeteo-content {
+    visibility: hidden;
+    position: absolute;
+    margin-top: -20px;
+    min-width: 200px;
+    min-height: 100px;
+    opacity: 0;
+    transition: 0.3s;
+}
+.dropdownMeteo-content:hover{
+  visibility: visible;
+  opacity: 1;
+}
+.imgmeteo:hover ~ .dropdownMeteo-content{
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
+}
+#meteoImg{
+  height: 8vw;
+  width: 8vw;
+  border-radius: 50%;
+  animation: aniMeteo 10s ease infinite alternate;
+}
+#meteoImg:hover{
+  border: 0.4vw solid rgb(182, 182, 182);
+  transition: 0.2s;
+}
+.aStation{
+    position: absolute;
+    top: 18vw;
+    left: 33.7vw;
+    transform: translate(-50%, -50%);
+}
+.stationImg{
+  position: absolute;
+  top: 7.5vw;
+  left: -7.5vw;
+  transform: translate(-50%, -50%);
+}
+.stationText{
+  font-size: 1.3vw;
+  position: absolute;
+  top: 10.5vw;
+  left: -12.5vw;
+  color: white;
+  opacity: 0;
+  transition: 0.2s;
+}
+.stationImg:hover ~ .stationText{
+  left: -11.5vw;
+  opacity: 1;
+  transition: 0.3s;
+}
+.aNoaa{
+    position: absolute;
+    top: 18vw;
+    left: 35vw;
+    transform: translate(-50%, -50%);
+}
+.noaaImg{
+  position: absolute;
+  top: 7.5vw;
+  left: 7.5vw;
+  transform: translate(-50%, -50%);
+}
+.noaaText{
+  font-size: 1.3vw;
+  position: absolute;
+  top: 10.5vw;
+  left: 3vw;
+  color: white;
+  opacity: 0;
+  transition: 0.2s;
+}
+.noaaImg:hover ~ .noaaText{
+  left: 4vw;
+  opacity: 1;
+  transition: 0.3s;
+}
+/**************************
+* Bouton Média
+**************************/
+.imgmedia{
+  position: absolute;
+  top: 35vw;
+  left: 35vw;
+  animation: aniMedia 8s ease infinite alternate;
+  display: inline-block;
+}
+.dropdownMedia-content {
+    visibility: hidden;
+    position: absolute;
+    margin-top: -20px;
+    min-width: 200px;
+    min-height: 100px;
+    opacity: 0;
+    transition: 0.3s;
+}
+.dropdownMedia-content:hover{
+  visibility: visible;
+  opacity: 1;
+}
+.imgmedia:hover ~ .dropdownMedia-content{
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
+}
+#mediaImg{
+  height: 8vw;
+  width: 8vw;
+  border-radius: 50%;
+  /*background-color: rgb(13, 175, 19);*/
+  animation: aniMedia 8s ease infinite alternate;
+}
+#mediaImg:hover{
+  border: 0.4vw solid rgb(182, 182, 182);
+  transition: 0.2s;
+}
+.aImg{
+    position: absolute;
+    top: 35vw;
+    left: 33.7vw;
+    transform: translate(-50%, -50%);
+}
+.photoImg{
+  position: absolute;
+  top: 7.5vw;
+  left: -7.5vw;
+  transform: translate(-50%, -50%);
+}
+.photoText{
+  font-size: 1.4vw;
+  position: absolute;
+  top: 10.5vw;
+  left: -12.5vw;
+  color: white;
+  opacity: 0;
+  transition: 0.2s;
+}
+.photoImg:hover ~ .photoText{
+  left: -11.5vw;
+  opacity: 1;
+  transition: 0.3s;
+}
+.aVideo{
+    position: absolute;
+    top: 35vw;
+    left: 35vw;
+    transform: translate(-50%, -50%);
+}
+.videoImg{
+  position: absolute;
+  top: 7.5vw;
+  left: 7.5vw;
+  transform: translate(-50%, -50%);
+}
+.videoText{
+  font-size: 1.4vw;
+  position: absolute;
+  top: 10.5vw;
+  left: 3vw;
+  color: white;
+  opacity: 0;
+  transition: 0.2s;
+}
+.videoImg:hover ~ .videoText{
+  left: 4vw;
+  opacity: 1;
+  transition: 0.3s;
+}
+
+/**************************
+* Bouton Documents
+**************************/
+.imgdoc{
+  animation: aniDownload 12s ease infinite alternate;
+  position: absolute;
+  top: 18vw;
+  left: 65vw;
+}
+.docText{
+  visibility: hidden;
+  position: absolute;
+  font-size: 1.5vw;
+  top: 18vw;
+  left: 65vw;
+  transform: translate(-90%, 290%);
+  opacity: 0;
+  transition: 0.2s;
+}
+.imgdoc:hover ~ .docText{
+  visibility: visible;
+  transform: translate(-70%, 290%);
+  opacity: 1;
+  transition: 0.2s;
+}
+/**************************
+* Bouton ELO
+**************************/
+.imgelo{
+  position: absolute;
+  top: 35vw;
+  left: 65vw;
+}
+.eloText{
+  visibility: hidden;
+  position: absolute;
+  top: 35vw;
+  left: 65vw;
+  transform: translate(-70%, 240%);
+  font-size: 1.6vw;
+  opacity: 0;
+  transition: 0.2s;
+}
+.imgelo:hover ~ .eloText{
+  visibility: visible;
+  transform: translate(-60%, 240%);
+  opacity: 1;
+  transition: 0.2s;
+}
+
+.invisible{
+  position: absolute;
+  visibility: hidden;
+  top: 41vw;
+  height: 8vw;
+}
+/**************************
+* Animations
+**************************/
+@keyframes aniMeteo {
+	0% {
+		background-color: rgb(42, 58, 163);
+	}
+	50% {
+		background-color: rgb(54, 75, 207);
+	}
+	100% {
+		background-color: rgb(38, 61, 205);
+	}
+}
+@keyframes aniMedia {
+  0% {
+		background-color: rgb(13, 175, 19);
+	}
+	50% {
+		background-color: rgb(45, 177, 50);
+	}
+	100% {
+		background-color: rgb(37, 149, 41);
+	}
+}
+@keyframes aniDownload {
+  0% {
+		background-color: rgb(145, 145, 145);
+	}
+	50% {
+		background-color: rgb(126, 126, 126);
+	}
+	100% {
+		background-color: rgb(108, 108, 108);
+	}
+}
