@@ -1,0 +1,92 @@
+/****************************************
+*Titre:		Formulaire CSS				*
+*Auteur:	Maxime Montandon			*
+*Date:		24.02.2021					*
+*Lieu:		Force Aérienne Payerne		*
+****************************************/
+
+/****************
+*	Corp Page	*
+****************/
+body
+{
+	font-family: Arial, sans-serif;
+	color: #090909;	
+}
+
+#page
+{
+	width: auto; 
+}
+
+/****************
+*	En-Tête		*
+****************/
+
+header
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+img
+{
+	width: 15mm;
+	height: 15mm;
+}
+
+header h1
+{
+	font-size: 200%;
+}
+
+header a
+{
+	visibility: hidden;
+}
+
+/****************
+*	Section		*
+****************/
+
+section h2
+{
+	font-size: 125%;
+}
+
+table
+{
+	margin: auto;
+	text-align: center;
+	border-collapse: collapse;
+}
+
+table tr:nth-child(odd)
+{
+  	background-color: rgb(150,255,255);
+}
+ 
+td, th
+{
+	border: 1px solid black;
+}
+
+/****************
+*	Pied		*
+****************/
+
+footer
+{
+	text-align: right;
+	font-size: 75%;
+}
+
+footer a
+{
+	text-decoration: none;
+	color: rgb(255, 50, 200);
+	font-weight: 800;
+}
+
+

@@ -1,0 +1,163 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+body{
+  background: #222;
+  font-family: ubuntu;
+  overflow-x: hidden;
+}
+a{
+  text-decoration: none;
+}
+p{
+  color: rgb(166, 166, 166);
+  font-size: 2.5vw;
+  text-align: center;
+}
+/**************************
+* Bouton retour
+**************************/
+
+.backbutton{
+  height: 5vw;
+  width: 5vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backbutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.backbutton:hover .backText{
+  visibility: visible;
+  transition: 0.2s;
+}
+.backText{
+  visibility: hidden;
+  position: relative;
+  top: 3.5vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 1.3vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+  height: 3vw;
+}
+/**************************
+* Page
+**************************/
+.Title{
+  font-size: 4vw;
+  color: rgb(166, 166, 166);
+  text-align: center;
+  text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+
+/**************************
+* Print
+**************************/
+#divPrint{
+  position: absolute;
+  top: 17vw;
+  height: 25vw;
+}
+#printImg{
+  position: relative;
+  height: 21.9vw;
+  border-radius: 1.5vw;
+  left: -2vw;
+}
+#printText{
+  position: relative;
+  left: 45vw;
+  width: 50vw;
+  top: -18vw;
+}
+/**************************
+* Mesure
+**************************/
+#divMesure{
+  position: absolute;
+  top: 43vw;
+  height: 25vw;
+  width: 95vw;
+}
+#mesureImg{
+  position: relative;
+  height: 21.9vw;
+  border-radius: 1.5vw;
+  left: 58.7vw;
+  top: 0vw;
+}
+#mesureText{
+  position: relative;
+  width: 50vw;
+  top: -17vw;
+  right: -1.8vw;
+}
+/**************************
+* Interface
+**************************/
+#divInterface{
+  position: absolute;
+  top: 70vw;
+  height: 25vw;
+}
+#interfaceImg{
+  position: relative;
+  height: 21.9vw;
+  border-radius: 1.5vw;
+  left: -2vw;
+}
+#interfaceText{
+  position: relative;
+  left: 45vw;
+  width: 50vw;
+  top: -18vw;
+}
+/**************************
+* Doc
+**************************/
+#divDoc{
+  position: absolute;
+  top: 100vw;
+  height: 25vw;
+}
+#docImg{
+  position: relative;
+  height: 21.9vw;
+  border-radius: 1.5vw;
+  left: 58.7vw;
+  top: 0vw;
+}
+#docText{
+  position: relative;
+  width: 50vw;
+  top: -17vw;
+  right: -1.8vw;
+}
+/**************************
+* Capacites
+**************************/
+#divCapacites{
+  position: absolute;
+  top: 130vw;
+  height: 20vw;
+  width: 97vw;
+}
+#capacitesText{
+  position: relative;
+  width: 70vw;
+  top: 0vw;
+  right: -14vw;
+}

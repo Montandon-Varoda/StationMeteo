@@ -1,0 +1,222 @@
+/****************************************
+*Titre:		Formulaire CSS				*
+*Auteur:	Maxime Montandon			*
+*Date:		10.02.2021					*
+*Lieu:		Force Aérienne Payerne		*
+****************************************/
+
+/****************
+*	Corp Page	*
+****************/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+body{
+	background: #222;
+	background-attachment: fixed;
+	font-family: ubuntu;
+	color: rgb(166, 166, 166);
+}
+#page{
+	margin: auto;
+}
+/**********
+* En-Tête *
+**********/
+header h1{
+	font-size: 4vw;
+ 	color: rgb(166, 166, 166);
+ 	text-align: center;
+ 	text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+
+/****************
+* Bouton retour *
+****************/
+
+.backbutton{
+  height: 5vw;
+  width: 5vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backbutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.backbutton:hover .backText{
+  visibility: visible;
+  transition: 0.2s;
+}
+.backText{
+  visibility: hidden;
+  position: relative;
+  top: 3.5vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 1.3vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+  height: 3vw;
+}
+
+/****************
+*	Section		*
+****************/
+section{
+	margin-left: 10vw; 
+	margin-right: 10vw; 
+}
+section h2{
+	position: relative;
+  	text-align: center;
+  	font-size: 3vw;
+}
+section h3{
+	position: relative;
+  	text-align: left;
+  	font-size: 2.5vw;
+}
+
+/*************
+* Formulaire *
+*************/
+label{
+	font-size: 2vw;
+}
+/*************
+* Conditions *
+*************/
+input[type=checkbox]{
+	height: 1.5vw;
+	width: 1.5vw;
+	margin-left: 5vw;
+}
+
+/**********
+* Période *
+**********/
+#periode label{
+	margin-left: 5vw;
+}
+input[type=submit], input[type=datetime-local]{
+	height: auto;
+	width: auto;
+	font-size: 1.5vw;
+}
+input[type=submit]{
+	margin-left: 5vw;
+}
+
+/***********
+* Résultat *
+***********/
+section p{
+	font-size: 2vw;
+	text-align: justify;
+	margin-left: 5vw;
+}
+
+/********
+* Phone *
+********/
+@media all and (max-width: 1024px){
+	body{
+		background: #222;
+		color: white;
+  		font-size: 4vw;
+	}	
+	/**************************
+	* Bouton retour
+	**************************/
+	.backbutton{
+	  height: 10vw;
+	  width: 10vw;
+	  border-radius: 50%;
+	  position: absolute;
+	  right: 10%;
+	  top: 5%;
+	  border: none;
+	  background-color: rgb(144, 144, 144);
+	}
+	.backbutton:hover{
+	  background-color: rgb(77, 77, 77);
+	  transition: 0.2s;
+	}
+	.backText{
+	  visibility: visible;
+	  position: relative;
+	  top: 7vw;
+	  color: white;
+	  font-family: 'Ubuntu';
+	  font-size: 3vw;
+	}
+	.backimg{
+	  position: absolute;
+	  transform: translate(-50%, -50%);
+	  left: 47%;
+	  top: 50%;
+	  right: 53%;
+	  bottom: 50%;
+	}
+	/****************
+	*	En-Tête		*
+	****************/
+	header h1{
+	font-size: 7vw;
+	}
+	/****************
+	*	Section		*
+	****************/
+	section{
+		margin-left: 0vw; 
+		margin-right: 0vw; 
+	}
+	section h2{
+		position: relative;
+	  	text-align: center;
+	  	font-size: 5vw;
+	}
+	section h3{
+		position: relative;
+	  	text-align: left;
+	  	font-size: 4.5vw;
+	}
+
+	/*************
+	* Formulaire *
+	*************/
+	label{
+		font-size: 4vw;
+	}
+	/*************
+	* Conditions *
+	*************/
+	input[type=checkbox]{
+		height: 2.5vw;
+		width: 2.5vw;
+	}
+
+	/**********
+	* Période *
+	**********/
+	input[type=submit], input[type=datetime-local]{
+		font-size: 2.5vw;
+	}
+	/***********
+	* Résultat *
+	***********/
+	section p{
+		font-size: 3vw;
+		text-align: justify;
+		margin-left: 0vw;
+	}
+}

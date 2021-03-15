@@ -1,0 +1,201 @@
+/*imports*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+body{
+  background: #222;
+  font-family: ubuntu;
+  overflow-x: hidden;
+}
+a{
+  text-decoration: none;
+}
+p{
+  color: rgb(166, 166, 166);
+  font-size: 2.5vw;
+  text-align: center;
+}
+/**************************
+* Bouton retour
+**************************/
+
+.backbutton{
+  height: 5vw;
+  width: 5vw;
+  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
+  border: none;
+  background-color: rgb(144, 144, 144);
+}
+.backbutton:hover{
+  background-color: rgb(77, 77, 77);
+  transition: 0.2s;
+}
+.backbutton:hover .backText{
+  visibility: visible;
+  transition: 0.2s;
+}
+.backText{
+  visibility: hidden;
+  position: relative;
+  top: 3.5vw;
+  color: white;
+  font-family: 'Ubuntu';
+  font-size: 1.3vw;
+}
+.backimg{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 47%;
+  top: 50%;
+  right: 53%;
+  bottom: 50%;
+  height: 3vw;
+}
+/**************************
+* Page
+**************************/
+.Title{
+  font-size: 4vw;
+  color: rgb(166, 166, 166);
+  text-align: center;
+  text-shadow: 0px 0px 1vw rgb(0, 0, 0);
+}
+
+/**************************
+* Places de travail
+**************************/
+#divPlaces{
+  position: absolute;
+  top: 17vw;
+  height: 25vw;
+}
+#atelierImg{
+  position: relative;
+  height: 21.9vw;
+  border-radius: 1.5vw;
+  left: -29.4vw;
+}
+#places{
+  position: relative;
+  left: 63.6vw;
+  width: 30vw;
+  top: -21.2vw;
+}
+/**************************
+* Local circuit
+**************************/
+#divLocalCircuit{
+  position: absolute;
+  top: 47vw;
+  height: 25vw;
+  width: 95vw;
+  right: 0vw;
+}
+#gravImg{
+  position: relative;
+  height: 19.7vw;
+  border-radius: 1.5vw;
+  left: 58.7vw;
+  top: -10.5vw;
+}
+#gravText{
+  position: relative;
+  width: 50vw;
+  top: 4vw;
+  right: -1.8vw;
+}
+/**************************
+* Imprimante 3d
+**************************/
+#divImpr3d{
+  position: absolute;
+  top: 75vw;
+  height: 23vw;
+  width: 90vw;
+}
+#impr3dImg{
+  position: relative;
+  height: 22.1vw;
+  border-radius: 1.5vw;
+  left: 4.9vw;
+}
+#impr3dText{
+  position: relative;
+  width: 50vw;
+  left: 43.7vw;
+  top: -15vw;
+}
+/**************************
+* Salle théorie
+**************************/
+#divSalleTh{
+  position: absolute;
+  top: 104vw;
+  height: 30vw;
+}
+#salleThImg1{
+  position: relative;
+  height: 24.5vw;
+  border-radius: 1.5vw;
+  left: -9.9vw;
+}
+#salleThImg2{
+  position: relative;
+  height: 24.5vw;
+  border-radius: 1.5vw;
+  left: 9vw;
+}
+#salleThText{
+  position: relative;
+  top: -10vw;
+  width: 15vw;
+  top: -14vw;
+  left: 41.5vw;
+}
+/**************************
+* Notebook
+**************************/
+#divNotebook{
+  position: absolute;
+  top: 134vw;
+  height: 25vw;
+}
+#notebookImg{
+  position: relative;
+  height: 22vw;
+  border-radius: 1.5vw;
+  left: 59vw;
+  top: -10.5vw;
+}
+#notebookText{
+  position: relative;
+  width: 50vw;
+  top: 6vw;
+  left: 5vw;
+}
+/**************************
+* Appareils
+**************************/
+#divAppareils{
+  position: absolute;
+  top: 170vw;
+  height: 35vw;
+  width: 99vw;
+}
+#appareilsImg{
+  position: relative;
+  height: 18.5vw;
+  border-radius: 1.5vw;
+  left: 49vw;
+  top: -10.5vw;
+  transform: translate(-50%, 0%);
+}
+#appareilsText{
+  position: relative;
+  width: 50vw;
+  top: 18vw;
+  left: 49vw;
+  transform: translate(-50%,0%);
+}
