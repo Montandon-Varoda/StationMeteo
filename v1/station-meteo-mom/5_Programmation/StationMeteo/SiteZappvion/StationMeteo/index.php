@@ -8,6 +8,8 @@
 	  <meta http-equiv="refresh" content="600"/>
     <link rel="icon" href="../icon.png" />
     <?php
+      gc_enable();
+      gc_collect_cycles();
       //Defini le jour de la mesure
       //Si le jour à été transmit via GET
       if (isset($_GET['dayToRead'])){
@@ -240,6 +242,9 @@
 			dans cette journée "  
 			src="windrose.php?dayToRead=<?php echo $dayToRead;?>"/>
 		</section>
+    <?php
+      gc_collect_cycles();
+    ?>
 	</div>
     <!--spacer-->
     <div class="Spacer">Space</div>
